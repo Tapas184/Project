@@ -16,6 +16,7 @@ public class UserPojo {
 	private String gender;
 	private String status = "LOCKED";
 	private String pwd;
+	private Date dob;
 	private Integer countryid;
 	private Integer stateid;
 	private Integer cityid;

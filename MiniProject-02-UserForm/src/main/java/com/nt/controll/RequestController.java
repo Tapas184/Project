@@ -70,9 +70,7 @@ public class RequestController {
 		String result = service.userInsert(desuser);
 		// set message to session object for displaying msg
 		ses.setAttribute("msg", result);
-		// set maximum msg time valid in sec
-		ses.setMaxInactiveInterval(3);
-		return "redirect:reg";
+		return "response";
 	}
 
 	@GetMapping("/loadpage")

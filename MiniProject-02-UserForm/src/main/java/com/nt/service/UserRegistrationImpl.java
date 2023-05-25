@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nt.customerror.ErrorInUserRegistration;
+import com.nt.customerror.ProblemInMailSend;
 import com.nt.entity.CityMaster;
 import com.nt.entity.CountryMaster;
 import com.nt.entity.StateMaster;
@@ -19,21 +20,23 @@ import com.nt.repository.CityRepository;
 import com.nt.repository.CountryRepository;
 import com.nt.repository.StateRepository;
 import com.nt.repository.UserRegistrationRepo;
+import com.nt.util.EmailUtils;
 
 @Service("userService")
 public class UserRegistrationImpl implements UserRegistrationInterface {
 
 	@Autowired
 	private UserRegistrationRepo repo;
-	
+
 	@Autowired
 	private CountryRepository countryRepo;
-	
+
 	@Autowired
 	private StateRepository stateRepo;
-	
+
 	@Autowired
 	private CityRepository cityRepo;
+
 	/**
 	 * This method used for get the update whether user is available or not
 	 * 
@@ -56,20 +59,20 @@ public class UserRegistrationImpl implements UserRegistrationInterface {
 	 * @param : UserObject
 	 */
 	@Override
-	public String userInsert(UserEntity user) throws ErrorInUserRegistration {
-		LocalDate local = LocalDate.now();
-		int day = local.getDayOfMonth();
-		int month = local.getMonthValue();
-		int year = local.getYear();
+	public String userInsert(UserEntity user) throws ErrorInUserRegistration, ProblemInMailSend {
 		Integer uid = 0;
-		Date sqlDate = new Date(year, month, day);
 		// for insert
 		try {
 			if (user.getId() == null) {
-				user.setInsertdate(sqlDate);
 				user.setPwd(TempPassWrd.genTempPass(6));
 				uid = repo.save(user).getId();
-				return "User almost registered, Kindly set passwored for your account id is," + uid;
+				EmailUtils email = new EmailUtils();
+				boolean sendMail = email.sendMail(user);
+				if (sendMail)
+					return "User almost registered, Kindly set passwored for your account id is," + uid + "<br>"
+							+ "Kinly check your mail and and activate your account";
+				else
+					throw new ProblemInMailSend("Problem In Mail send");
 			}
 			// for update
 			else {
@@ -79,39 +82,35 @@ public class UserRegistrationImpl implements UserRegistrationInterface {
 		} catch (Exception e) {
 			throw new ErrorInUserRegistration(e.getMessage());
 		}
-	}//end of the method ErrorInUserRegistration
-	
+	}// end of the method ErrorInUserRegistration
+
 	@Override
 	public Map<Integer, String> getCountrisInfo() {
-		//get All Countries
+		// get All Countries
 		List<CountryMaster> countryList = countryRepo.findAll();
-		Map<Integer, String> map= new LinkedHashMap<>();
-		 //convert countrylist to Map Object
-		countryList.forEach(s->
-		   map.put(s.getId(), s.getCountryname())
-				);
+		Map<Integer, String> map = new LinkedHashMap<>();
+		// convert countrylist to Map Object
+		countryList.forEach(s -> map.put(s.getId(), s.getCountryname()));
 		return map;
 	}//
-	
+
 	@Override
 	public Map<Integer, String> getStateInfo(Integer countryId) {
-		//call the StateRepositry method
+		// call the StateRepositry method
 		List<StateMaster> stateList = stateRepo.findByCountryid(countryId);
-		Map<Integer, String> map= new LinkedHashMap<>();
-		//convert List collection to map
-		stateList.forEach(state->
-		    map.put(state.getStateid(), state.getStatename())
-				);
+		Map<Integer, String> map = new LinkedHashMap<>();
+		// convert List collection to map
+		stateList.forEach(state -> map.put(state.getStateid(), state.getStatename()));
 		return map;
-	}//stateInfo
-	
+	}// stateInfo
+
 	@Override
 	public Map<Integer, String> getCityInfo(Integer stateId) {
-		//call the city repository method
+		// call the city repository method
 		List<CityMaster> cityList = cityRepo.findByStateid(stateId);
-		Map<Integer, String> map= new LinkedHashMap<>();
-		//convert citylist into map
-		cityList.forEach(city->map.put(city.getCityid(), city.getCityname()));
+		Map<Integer, String> map = new LinkedHashMap<>();
+		// convert citylist into map
+		cityList.forEach(city -> map.put(city.getCityid(), city.getCityname()));
 		return map;
-	}//city info
+	}// city info
 }

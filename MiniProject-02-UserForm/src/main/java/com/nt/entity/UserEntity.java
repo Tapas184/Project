@@ -53,6 +53,9 @@ public class UserEntity implements Serializable {
 	@Column(name = "Gender", length = 10)
 	private String gender;
 	
+	@Column(name = "DOB")
+	private Date dob;
+	
 	@Column(name = "Status", length = 15)
 	private String status="Locked";
 	
@@ -69,12 +72,12 @@ public class UserEntity implements Serializable {
 	private Integer cityid;
 	
 	@CreationTimestamp
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "Insert_Date", updatable = false)
 	private Date insertdate;
 	
 	@UpdateTimestamp
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "Update_Date", insertable = false)
 	private Date updatedate;
 }// end of the class

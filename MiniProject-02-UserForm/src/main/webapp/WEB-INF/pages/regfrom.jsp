@@ -3,6 +3,9 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="frm"%>
 <!DOCTYPE html>
 <head>
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <meta charset="ISO-8859-1">
 <title>Registration Form</title>
 </head>
@@ -43,6 +46,12 @@
 					<frm:radiobutton path="gender" value="Female" />Female</td>
 			</tr>
 			<tr>
+				<td>Date Of Birth :</td>
+				<td>
+				<frm:input path="dob"/>
+				</td>
+			</tr>
+			<tr>
 				<td>Country :</td>
 				<td><frm:select path="countryid">
 						<frm:option value="">-Select-</frm:option>
@@ -69,5 +78,10 @@
 
 	</frm:form>
 	<script type="text/javascript" src="./js/App.js"></script>
+	  <script>
+  $( function() {
+    $( "#dob" ).datepicker();
+  } );
+  </script>
 </body>
 

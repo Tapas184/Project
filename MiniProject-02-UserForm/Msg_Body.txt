@@ -1,0 +1,16 @@
+
+<body>
+	<p>
+	<b>Hi {fname} {lname}</b>,
+	
+	Welcome to our family. Your registration almost completed.
+	Kindly click on below link
+	<br>
+	Use Temporary Password for set the password : {pwd}
+	<a href="http://localhost:5050/unlockaccount?email={emailid}"></a>
+	<br>
+	<br>
+	Thanks,
+	IT Solution Pvt Ltd.
+	</p>
+</body>

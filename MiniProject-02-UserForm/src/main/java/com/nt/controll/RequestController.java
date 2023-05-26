@@ -29,7 +29,6 @@ public class RequestController {
 
 	@GetMapping("/")
 	public String showHome() {
-		log.info("Class Name" + this.getClass().getName() + " Method : showHome()");
 		return "home";
 	}
 

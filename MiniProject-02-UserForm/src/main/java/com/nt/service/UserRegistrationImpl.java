@@ -1,7 +1,5 @@
 package com.nt.service;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -109,8 +107,14 @@ public class UserRegistrationImpl implements UserRegistrationInterface {
 		// call the city repository method
 		List<CityMaster> cityList = cityRepo.findByStateid(stateId);
 		Map<Integer, String> map = new LinkedHashMap<>();
-		// convert citylist into map
+		// convert city list into map
 		cityList.forEach(city -> map.put(city.getCityid(), city.getCityname()));
 		return map;
 	}// city info
+	
+	@Override
+	public UserEntity findUserByMail(String mail) {
+		UserEntity user = repo.findByEmail(mail);
+		return user;
+	}
 }

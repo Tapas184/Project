@@ -7,11 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>
+<h4>
   <font color="red">
-     Problem in Registration Kindly check given details correctly.
+     Problem in Registration Kindly check given details correctly.<br>
+     ${wrongpass}
    </font>
-</h1>
+</h4>
 <br>
 <a href="reg">Home</a>
 </body>

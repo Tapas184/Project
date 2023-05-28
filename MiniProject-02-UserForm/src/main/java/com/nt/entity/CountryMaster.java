@@ -14,6 +14,10 @@ import lombok.Data;
 @Table(name = "COUNTRY_MASTER")
 public class CountryMaster implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1003L;
 	@Id
 	@Column(name = "COUNTRY_ID")
 	private Integer id;

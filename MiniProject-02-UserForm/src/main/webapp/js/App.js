@@ -63,3 +63,15 @@ $(document).ready(
 			});
 	});
 
+//For checking New Password and Confirm password is  same ofr not
+function validatePwd() {
+	$("#errorid").html("");
+	var newPwd = $("#newPwd").val();
+	var confPwd = $("#confrmPwd").val();
+	if (newPwd != confPwd) {
+		$("#errorid").html("New Password and Confirm password not equal");
+		return false;
+	}
+	return true;
+}//function
+

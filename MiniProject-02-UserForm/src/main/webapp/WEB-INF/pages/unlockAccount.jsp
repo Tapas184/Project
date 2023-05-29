@@ -26,11 +26,11 @@
 			</tr>
 			<tr>
 				<td>New Password :</td>
-				<td><frm:input path="newPwd" /></td>
+				<td><frm:password path="newPwd" /></td>
 			</tr>
 			<tr>
 				<td>Confirm Password :</td>
-				<td><frm:input path="confrmPwd" /></td>
+				<td><frm:password path="confrmPwd" /></td>
 			</tr>
 			<tr>
 				<td colspan="2"><input type="submit" value="unlock"

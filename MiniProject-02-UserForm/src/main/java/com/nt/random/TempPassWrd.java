@@ -14,5 +14,13 @@ public class TempPassWrd {
 		}
 		return sb.toString();
 	}
+	
+	public static String otpGen() {
+		StringBuilder otp = new StringBuilder();
+		for(int i = 0; i<=5; i++) {
+			otp.append(new Random().nextInt(9));
+		}
+		return otp.toString();
+	}
 
 }

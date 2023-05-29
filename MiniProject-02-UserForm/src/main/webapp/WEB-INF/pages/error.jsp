@@ -14,6 +14,6 @@
    </font>
 </h4>
 <br>
-<a href="reg">Home</a>
+<a href="./">Home</a>
 </body>
 </html>

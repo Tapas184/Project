@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nt.entity.UserEntity;
-import com.nt.model.AccountLogin;
 import com.nt.model.UserPojo;
 import com.nt.service.UserRegistrationInterface;
 
@@ -23,21 +22,10 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
-public class RequestController {
+public class RegistrationRequestController {
 
 	@Autowired
 	private UserRegistrationInterface service;
-
-	@GetMapping("/")
-	public String showHome(@ModelAttribute("acc") AccountLogin acc) {
-		return "home";
-	}//show Home
-	
-	@PostMapping("login")
-	public String loginSuccess() {
-		return "loginsuccess";
-		
-	}//loginSuccess
 
 	@GetMapping("/reg")
 	public String userRegistrationForm(@ModelAttribute("user") UserPojo user) {
@@ -55,10 +43,7 @@ public class RequestController {
 	@ResponseBody
 	public String mailVerification(HttpServletRequest req) {
 		String parameter = req.getParameter("email");
-		System.out.println(parameter);
-		String result = service.userDetailsFindByMail(parameter);
-		System.out.println(result);
-		return result;
+		return service.userDetailsFindByMail(parameter);
 	}
 
 	/**
@@ -94,8 +79,7 @@ public class RequestController {
 	public Map<Integer, String> getStateInfo(@RequestParam("cid") Integer countryId) {
 		log.info("Executing getStateInfo");
 		log.info("Call the controller - getStateInfo()-service");
-		Map<Integer, String> map = service.getStateInfo(countryId);
-		return map;
+		return service.getStateInfo(countryId);
 	}
 
 	@GetMapping("/getcity")
@@ -103,7 +87,6 @@ public class RequestController {
 	public Map<Integer, String> getCityInfo(@RequestParam("sid") Integer stateId) {
 		log.info("executing getCityInfo()");
 		log.info("called controller-getCityInfo-service");
-		System.out.println(service.getCityInfo(stateId));
 		return service.getCityInfo(stateId);
 	}
 

@@ -13,21 +13,23 @@
 	<f:form method="POST" action="login" modelAttribute="acc">
 		<table style="margin-left: auto; margin-right: auto;">
 			<tr>
-				<td><f:input path="username" title="Enter User Name" /></td>
+				<td>Your Mail :</td>
+				<td><f:input path="email" title="Enter User email" /></td>
 			</tr>
 			<tr>
-				<td><f:input path="password" title="Enter Your Password" /></td>
+				<td>Password :</td>
+				<td><f:password path="password" title="Enter Your Password" /></td>
 			</tr>
 			<tr>
-				<td style="margin-right: auto;"><input type="submit" value="SignIn" /></td>
-				<td style="margin-left: auto"><a href="resetpass"><button>Forgot
-							Password</button></a>
+				<td colspan="2" style="text-align: center;"><input
+					type="submit" value="SignIn" /></td>
 			</tr>
 		</table>
 	</f:form>
 	<hr>
 	<h2 style="text-align: center;">
 		<b>--OR--</b> <br> <a href="reg"><button>Create
-				Account</button></a>
+				Account</button></a> &nbsp; &nbsp; <a hreflang="forgotpwd"><button>Forgot
+				Password</button></a>
 	</h2>
 </html>

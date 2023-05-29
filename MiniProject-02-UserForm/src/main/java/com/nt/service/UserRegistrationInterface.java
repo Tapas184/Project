@@ -18,5 +18,6 @@ public interface UserRegistrationInterface {
 	public Map<Integer, String> getCityInfo(Integer stateId);
 	
 	public UserEntity findUserByMail(String mail);
+	
 
 }

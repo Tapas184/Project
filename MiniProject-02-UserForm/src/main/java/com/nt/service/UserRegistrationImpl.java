@@ -114,7 +114,6 @@ public class UserRegistrationImpl implements UserRegistrationInterface {
 	
 	@Override
 	public UserEntity findUserByMail(String mail) {
-		UserEntity user = repo.findByEmail(mail);
-		return user;
+		return repo.findByEmail(mail);
 	}
 }

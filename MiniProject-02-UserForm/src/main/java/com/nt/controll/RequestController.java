@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nt.entity.UserEntity;
+import com.nt.model.AccountLogin;
 import com.nt.model.UserPojo;
 import com.nt.service.UserRegistrationInterface;
 
@@ -28,9 +29,15 @@ public class RequestController {
 	private UserRegistrationInterface service;
 
 	@GetMapping("/")
-	public String showHome() {
+	public String showHome(@ModelAttribute("acc") AccountLogin acc) {
 		return "home";
-	}
+	}//show Home
+	
+	@PostMapping("login")
+	public String loginSuccess() {
+		return "loginsuccess";
+		
+	}//loginSuccess
 
 	@GetMapping("/reg")
 	public String userRegistrationForm(@ModelAttribute("user") UserPojo user) {

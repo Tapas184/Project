@@ -22,7 +22,7 @@
 			</tr>
 			<tr>
 				<td>Temporary Password :</td>
-				<td><frm:input path="temPwd" /></td>
+				<td><frm:input path="temPwd"  /></td>
 			</tr>
 			<tr>
 				<td>New Password :</td>

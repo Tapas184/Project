@@ -29,7 +29,7 @@
 	<hr>
 	<h2 style="text-align: center;">
 		<b>--OR--</b> <br> <a href="reg"><button>Create
-				Account</button></a> &nbsp; &nbsp; <a hreflang="forgotpwd"><button>Forgot
+				Account</button></a> &nbsp; &nbsp; <a href="forgotpwd"><button>Forgot
 				Password</button></a>
 	</h2>
 </html>

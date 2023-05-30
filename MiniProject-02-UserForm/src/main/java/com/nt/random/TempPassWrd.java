@@ -1,5 +1,6 @@
 package com.nt.random;
 
+import java.text.DecimalFormat;
 import java.util.Random;
 import java.util.UUID;
 
@@ -22,6 +23,11 @@ public class TempPassWrd {
 			otp.append(new Random().nextInt(9));
 		}
 		return otp.toString();
+	}
+	
+	public static String otp() {
+		return new DecimalFormat("000000")
+				  .format(new Random().nextInt(999999));
 	}
 
 }

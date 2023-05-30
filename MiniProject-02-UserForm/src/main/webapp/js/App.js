@@ -75,3 +75,15 @@ function validatePwd() {
 	return true;
 }//function
 
+
+function conformPwd() {
+		$("#error").html("");
+		var newPwd = $("#newPass").val();
+		var confPwd = $("#confPass").val();
+		if (newPwd != confPwd) {
+			$("#error").html("Both Password mismatch");
+			return false;
+		}
+		return true;
+	}
+

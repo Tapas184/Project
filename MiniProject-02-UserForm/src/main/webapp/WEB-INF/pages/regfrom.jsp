@@ -31,10 +31,9 @@
 			</tr>
 			<tr>
 				<td>Email :</td>
-				<td><frm:input path="email" title="Enter Email Address" /> <font
-					color="red">
-						<div id="dupmail"></div>
-				</font></td>
+				<td><frm:input path="email" title="Enter Email Address" /> 
+						<span id="dupmail" style="color: red"></span>
+				</td>
 			</tr>
 			<tr>
 				<td>PhoneNo :</td>

@@ -8,6 +8,7 @@
 </head>
 <body>
     <span style="color: green">${msg}</span> <br>
+    <br>
     <a href="reg"><button>Registration Page</button></a>
 </body>
 </html>

@@ -8,13 +8,12 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.nt.entity.UserEntity;
 @Service
-public class EmailUtils {
+public class EmailUtils implements EmailUtilsInterface {
 
 	@Autowired
 	private JavaMailSender mailsender;
@@ -30,7 +29,7 @@ public class EmailUtils {
 			mail.setContent(getLockAccEmailBody(user), "text/html; charset=utf-8");
 			mailsender.send(mail);
 			
-			/*
+			/* this is for simple text
 			 * SimpleMailMessage msg = new SimpleMailMessage(); msg.setTo(user.getEmail());
 			 * msg.setSubject("Unlock Account"); msg.setFrom("routtapas1995@gmail.com");
 			 * msg.setText(getLockAccEmailBody(user)); mailsender.send(msg);

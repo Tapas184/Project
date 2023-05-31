@@ -18,7 +18,7 @@ import com.nt.repository.CityRepository;
 import com.nt.repository.CountryRepository;
 import com.nt.repository.StateRepository;
 import com.nt.repository.UserRegistrationRepo;
-import com.nt.util.EmailUtils;
+import com.nt.util.EmailUtilsInterface;
 
 @Service("userService")
 public class UserRegistrationImpl implements UserRegistrationInterface {
@@ -35,7 +35,7 @@ public class UserRegistrationImpl implements UserRegistrationInterface {
 	@Autowired
 	private CityRepository cityRepo;
 	@Autowired
-	private EmailUtils email;
+	private EmailUtilsInterface email;
 
 	/**
 	 * This method used for get the update whether user is available or not

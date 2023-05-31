@@ -16,9 +16,6 @@
 
 	<h1>Registration Form</h1>
 	<br>
-	<h5>
-		<font color="green"> ${msg} </font>
-	</h5>
 	<frm:form action="userReg" method="POST" modelAttribute="user">
 		<table>
 			<tr>
@@ -78,9 +75,9 @@
 	</frm:form>
 	<script type="text/javascript" src="./js/App.js"></script>
 	  <script>
-  $( function() {
+  function() {
     $( "#dob" ).datepicker();
-  } );
+  }
   </script>
 </body>
 

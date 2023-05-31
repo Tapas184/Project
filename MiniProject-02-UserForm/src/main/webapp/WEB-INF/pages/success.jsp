@@ -11,12 +11,13 @@
 	<frm:choose>
 		<frm:when test="${check}">
 			<h1>
-				<span style="color: green;">${successMsg}</span>
+				<span style="color: green;">${unlockMsg}</span>
+				<br>
+				<a href="./" style="text-align: center;"><button>Home</button></a>
 			</h1>
 		</frm:when>
 		<frm:otherwise>
 			<span style="color: red;">${failuerMsg}</span>
-			<br>
 			<br>
 			<a href="./" style="text-align: center;"><button>Home</button></a>
 		</frm:otherwise>

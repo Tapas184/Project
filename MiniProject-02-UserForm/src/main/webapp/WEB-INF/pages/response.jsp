@@ -7,7 +7,7 @@
 <title>Registered sucessFully</title>
 </head>
 <body>
-    <h2>${msg}</h2> <br>
+    <span style="color: green">${msg}</span> <br>
     <a href="reg"><button>Registration Page</button></a>
 </body>
 </html>

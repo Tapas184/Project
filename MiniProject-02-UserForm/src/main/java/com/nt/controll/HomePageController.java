@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.nt.constant.StringConstatnt;
 import com.nt.entity.UserEntity;
 import com.nt.model.AccountLogin;
 import com.nt.model.ForgotPwd;
@@ -31,15 +32,15 @@ public class HomePageController {
 
 	@GetMapping("/")
 	public String showHomePage(@ModelAttribute("acc") AccountLogin acc) {
-		log.info("*** Home Page ****");
+		log.info(StringConstatnt.METHOD_EXECUTION_START+"showHomePage");
 		return "home";
 	}// end of the method showHomePage
 
 	@PostMapping("/login")
 	public String afterLogin(@ModelAttribute("acc") AccountLogin acc, Map<String, Object> map) {
-		log.info("****cls-HomePageController, Method-afterLogin started****");
+		log.info(StringConstatnt.METHOD_EXECUTION_START);
 		try {
-			log.debug("***** Method- afterLogin debug started *******");
+			log.debug(StringConstatnt.DEBUG_EXECUTION_STARTED);
 			boolean check = false;
 			UserEntity user = service.findUserByMail(acc.getEmail()); // call the service calss
 			if (user != null && acc.getPassword().equals(user.getPwd())) {
@@ -49,12 +50,12 @@ public class HomePageController {
 				map.put("check", check); // kept check in model view
 			} else {
 				// else condition failed
-				String failuerMsg = "Failed in login kindly input correct ID and password"; // failed message
+				String failuerMsg = StringConstatnt.WRONG_ID_PASSWORD; // failed message
 				map.put("failuerMsg", failuerMsg); // kept failure message in model view
 				map.put("check", check); // kept failure message in model view
 			}
 		} catch (Exception e) {
-			log.debug("***** Method- afterLogin debug ended *******");
+			log.error(StringConstatnt.ERROR_EXECUTION_STARTED+e.getMessage());
 		}
 		return "success";
 	}// afterLogin
@@ -67,37 +68,34 @@ public class HomePageController {
 	@PostMapping("/frgot")
 	public String checkMailIsValidOrNot(@ModelAttribute("frgt") ForgotPwd frgt, Map<String, Object> map,
 			HttpSession ses) {
-		log.info("********checkMailIsValidOrNot Method started**********");
+		log.info(StringConstatnt.METHOD_EXECUTION_START+" Valid mail check");
 		try {
-			log.debug("********Debug started***********");
+			log.debug(StringConstatnt.DEBUG_EXECUTION_STARTED);
 			UserEntity user = service.findUserByMail(frgt.getEmail()); // get user by mail
 			ses.setAttribute("userMail", frgt.getEmail()); // kept mail into the HTTPsession attributes
 			if (user != null) {
-				PhoneNumber to = new PhoneNumber("+91" + user.getPhno().toString()); // Create a phone object and
-																						// passing user phone number
+				PhoneNumber to = new PhoneNumber("+91" + user.getPhno().toString()); // Create a phone object and																	// passing user phone number
 				String otp = TempPassWrd.otp(); // generate oTp
 				ses.setAttribute("otp", otp); // kept otp in HTTP session
-				String body = "Your OTP(One Time Password) is " + otp + "Don't share any one Use for reset password"; // Prepare
-																														// sms
-																														// body
+				String body = "Your OTP(One Time Password) is " + otp + "Don't share any one Use for reset password"; // Prepare message Body																									// body
 				smsservice.sendSms(to, body); // call the smsservice method
 				return "/forgot/resetpwd"; // return LVN
 			}
-			String notFoundUser = "Given Email not found"; // else part failure message prepared
+			String notFoundUser = StringConstatnt.EMAIL_NOT_FOUND; // else part failure message prepared
 			map.put("notfound", notFoundUser); // kept failure message in model views
-			log.debug("********Debug ended***********");
+			log.debug(StringConstatnt.DEBUG_EXECUTION_ENDED);
 		} catch (Exception e) {
-			log.error("Error : " + e.getMessage());
+			log.error(StringConstatnt.ERROR_EXECUTION_STARTED + e.getMessage());
 		}
-		log.info("********checkMailIsValidOrNot Method ended**********");
+		log.info(StringConstatnt.METHOD_EXECUTION_ENDED);
 		return "/forgot/forgotError"; // return LVN
 	}// checkMailIsValidOrNot method closed
 
 	@PostMapping("/resetPwd")
 	public String changePassword(HttpSession ses, @ModelAttribute("frgt") ForgotPwd frgt, Map<String, Object> map) {
-		log.info("*******changePassword started*******");
+		log.info(StringConstatnt.METHOD_EXECUTION_START+" changePassword");
 		try {
-			log.debug("<changePassword started Debug>");
+			log.debug(StringConstatnt.DEBUG_EXECUTION_STARTED);
 			String otp = (String) ses.getAttribute("otp");
 
 			if (otp.equals(frgt.getOtp())) {
@@ -107,11 +105,11 @@ public class HomePageController {
 				ses.removeAttribute("otp");
 				return "/forgot/successpwdreset";
 			}
-			log.debug("<changePassword end Debug>");
+			log.debug(StringConstatnt.DEBUG_EXECUTION_ENDED);
 		} catch (Exception e) {
-			log.error("Error :" + e.getMessage());
+			log.error(StringConstatnt.ERROR_EXECUTION_STARTED + e.getMessage());
 		}
-		log.info("*******changePassword ended*******");
+		log.info(StringConstatnt.METHOD_EXECUTION_ENDED);
 		return "/forgot/ErrorInResetPwd";
 	}
 

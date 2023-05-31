@@ -34,6 +34,8 @@ public class UserRegistrationImpl implements UserRegistrationInterface {
 
 	@Autowired
 	private CityRepository cityRepo;
+	@Autowired
+	private EmailUtils email;
 
 	/**
 	 * This method used for get the update whether user is available or not
@@ -64,7 +66,6 @@ public class UserRegistrationImpl implements UserRegistrationInterface {
 			if (user.getId() == null) {
 				user.setPwd(TempPassWrd.genTempPass(6));
 				uid = repo.save(user).getId();
-				EmailUtils email = new EmailUtils();
 				boolean sendMail = email.sendMail(user);
 				if (sendMail)
 					return "User almost registered, Kindly set passwored for your account id is," + uid + "<br>"

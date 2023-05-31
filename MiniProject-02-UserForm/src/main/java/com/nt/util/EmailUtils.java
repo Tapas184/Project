@@ -4,16 +4,16 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.nt.entity.UserEntity;
-
-@Component("mail")
+@Service
 public class EmailUtils {
 
 	@Autowired
@@ -21,14 +21,21 @@ public class EmailUtils {
 
 	public boolean sendMail(UserEntity user) {
 		try {
-			MimeMessage msg = mailsender.createMimeMessage();
-			MimeMessageHelper helper = new MimeMessageHelper(msg);
-			helper.setTo(user.getEmail());
-			helper.setSubject("Activate Your Account");
-			helper.setText(getLockAccEmailBody(user), true);
-			mailsender.send(msg);
-
-			return true;
+			
+			
+			MimeMessage mail = mailsender.createMimeMessage();
+			mail.setFrom(new InternetAddress("routtapas1995@gmail.com"));
+			mail.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(user.getEmail()));
+			mail.setSubject("Unlock Account");
+			mail.setContent(getLockAccEmailBody(user), "text/html; charset=utf-8");
+			mailsender.send(mail);
+			
+			/*
+			 * SimpleMailMessage msg = new SimpleMailMessage(); msg.setTo(user.getEmail());
+			 * msg.setSubject("Unlock Account"); msg.setFrom("routtapas1995@gmail.com");
+			 * msg.setText(getLockAccEmailBody(user)); mailsender.send(msg);
+			 * 
+			 */			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -36,7 +43,7 @@ public class EmailUtils {
 	}
 
 	private String getLockAccEmailBody(UserEntity user) throws IOException {
-		try (FileReader fr = new FileReader("/MiniProject-02-UserForm/Msg_Body.txt");
+		try (FileReader fr = new FileReader("Msg_Body.html");
 				BufferedReader br = new BufferedReader(fr)) {
 			StringBuilder sb = new StringBuilder();
 			String line = br.readLine();

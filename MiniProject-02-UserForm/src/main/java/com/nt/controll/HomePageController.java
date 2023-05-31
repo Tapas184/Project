@@ -64,7 +64,12 @@ public class HomePageController {
 	public String forgotPwdFrm(@ModelAttribute("frgt") ForgotPwd frgt) {
 		return "forgot/forgetPwd";
 	}// end of forgotPwdFrm
-
+	
+	
+	  @GetMapping("/resetpass") public String resetPwdForm(HttpSession
+	  ses, @ModelAttribute("frgt") ForgotPwd frgt, Map<String, Object> map) {
+	  return "/forgot/resetpwd"; }
+	 
 	@PostMapping("/frgot")
 	public String checkMailIsValidOrNot(@ModelAttribute("frgt") ForgotPwd frgt, Map<String, Object> map,
 			HttpSession ses) {
@@ -79,7 +84,7 @@ public class HomePageController {
 				ses.setAttribute("otp", otp); // kept otp in HTTP session
 				String body = "Your OTP(One Time Password) is " + otp + "Don't share any one Use for reset password"; // Prepare message Body																									// body
 				smsservice.sendSms(to, body); // call the smsservice method
-				return "/forgot/resetpwd"; // return LVN
+				return "redirect:resetpass"; // return LVN
 			}
 			String notFoundUser = StringConstatnt.EMAIL_NOT_FOUND; // else part failure message prepared
 			map.put("notfound", notFoundUser); // kept failure message in model views
@@ -90,6 +95,7 @@ public class HomePageController {
 		log.info(StringConstatnt.METHOD_EXECUTION_ENDED);
 		return "/forgot/forgotError"; // return LVN
 	}// checkMailIsValidOrNot method closed
+	
 
 	@PostMapping("/resetPwd")
 	public String changePassword(HttpSession ses, @ModelAttribute("frgt") ForgotPwd frgt, Map<String, Object> map) {

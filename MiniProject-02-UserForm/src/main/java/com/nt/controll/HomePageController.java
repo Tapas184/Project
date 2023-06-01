@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,22 +38,25 @@ public class HomePageController {
 	}// end of the method showHomePage
 
 	@PostMapping("/login")
-	public String afterLogin(@ModelAttribute("acc") AccountLogin acc, Map<String, Object> map) {
+	public String afterLogin(@ModelAttribute("acc") AccountLogin acc, 
+			                Map<String, Object> map) {
 		log.info(StringConstatnt.METHOD_EXECUTION_START);
+		int s;
 		try {
 			log.debug(StringConstatnt.DEBUG_EXECUTION_STARTED);
-			boolean check = false;
 			UserEntity user = service.findUserByMail(acc.getEmail()); // call the service calss
 			if (user != null && acc.getPassword().equals(user.getPwd())) {
 				String successMsg = "SuccessFully loggedIn" + user.getFname();// string msg
-				map.put("successMsg", successMsg); // kept success message in model view
-				check = true; // Assign check variable true
-				map.put("check", check); // kept check in model view
+				s=1;
+				map.put("s", s);
+				map.put("successMsg", successMsg);
+				 // kept success message in model view
 			} else {
+				s=2;
+				map.put("s", s);
 				// else condition failed
 				String failuerMsg = StringConstatnt.WRONG_ID_PASSWORD; // failed message
-				map.put("failuerMsg", failuerMsg); // kept failure message in model view
-				map.put("check", check); // kept failure message in model view
+				map.put("failuerMsg", failuerMsg);
 			}
 		} catch (Exception e) {
 			log.error(StringConstatnt.ERROR_EXECUTION_STARTED+e.getMessage());

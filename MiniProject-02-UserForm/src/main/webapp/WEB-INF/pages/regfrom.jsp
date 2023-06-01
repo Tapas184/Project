@@ -76,7 +76,7 @@
 	<script type="text/javascript" src="./js/App.js"></script>
 	  <script>
   function() {
-    $( "#dob" ).datepicker();
+    $("#dob").datepicker();
   }
   </script>
 </body>

@@ -40,6 +40,7 @@ public class UnlockAccountFromRequest {
 	@PostMapping("/unlockAcc")
 	public String postUnlockAcc(@ModelAttribute("acc") UnlockAccount acc, HttpSession ses, Map<String, Object> map) {
 		log.info(StringConstatnt.ERROR_EXECUTION_STARTED + " postUnlockAcc");
+		int s;
 		try {
 			log.debug(StringConstatnt.DEBUG_EXECUTION_STARTED);
 			// get Mail id from session Attributes
@@ -54,6 +55,8 @@ public class UnlockAccountFromRequest {
 				user.setPwd(acc.getNewPwd());
 				// change user status
 				user.setStatus("UNLOCKED");
+				s=3;
+				map.put("s", s);
 				// call the user insert method
 				String result = service.userInsert(user);
 				// kept the result in Model
@@ -61,6 +64,8 @@ public class UnlockAccountFromRequest {
 				// return LVN
 				return "success";
 			} else {
+				s=4;
+				map.put("s", s);
 				// false: showing wrong message
 				String wrong = "Temporary password is wrong";
 				map.put("wrongpass", wrong);

@@ -36,8 +36,7 @@
 	</frm:form>
 	<script type="text/javascript" src="./js/App.js"></script>
 	<hr>
-	<h5 align="center"><a href="./" ><button>Home</button></a></h5>
+	<h5 style="margin: auto;"><a href="./" ><button>Home</button></a></h5>
 	
 </body>
-
 </html>

@@ -1,5 +1,8 @@
 package com.nt.constant;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class StringConstatnt {
 
 	public static final String METHOD_EXECUTION_START="<<Method execution started>>";

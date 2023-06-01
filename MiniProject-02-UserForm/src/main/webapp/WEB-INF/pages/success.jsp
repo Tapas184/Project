@@ -10,6 +10,7 @@
 <body>
   <frm:choose>
      <frm:when test="${s==1}">
+     
 		<span style="color: green;">${successMsg}</span> 
 	</frm:when>
 	<frm:when test="${s==2}">

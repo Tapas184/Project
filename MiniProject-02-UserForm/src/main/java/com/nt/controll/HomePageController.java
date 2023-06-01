@@ -66,8 +66,10 @@ public class HomePageController {
 	}// end of forgotPwdFrm
 	
 	
-	  @GetMapping("/resetpass") public String resetPwdForm(HttpSession
-	  ses, @ModelAttribute("frgt") ForgotPwd frgt, Map<String, Object> map) {
+	  @GetMapping("/resetpass") 
+	  public String resetPwdForm(HttpSession ses, 
+			                @ModelAttribute("frgt") ForgotPwd frgt, 
+			                Map<String, Object> map) {
 	  return "/forgot/resetpwd"; }
 	 
 	@PostMapping("/frgot")

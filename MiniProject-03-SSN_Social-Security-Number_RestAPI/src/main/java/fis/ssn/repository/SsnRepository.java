@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import fis.ssn.entity.SsnEntity;
 
 
-public interface SsnRepository extends JpaRepository<SsnEntity, Long> {
+public interface SsnRepository extends JpaRepository<SsnEntity, Serializable> {
 }

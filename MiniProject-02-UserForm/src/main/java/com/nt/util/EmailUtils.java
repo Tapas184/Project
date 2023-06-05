@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import javax.mail.Message.RecipientType;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
@@ -24,7 +25,7 @@ public class EmailUtils implements EmailUtilsInterface {
 			
 			MimeMessage mail = mailsender.createMimeMessage();
 			mail.setFrom(new InternetAddress("routtapas1995@gmail.com"));
-			mail.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(user.getEmail()));
+			mail.setRecipient(RecipientType.TO, new InternetAddress(user.getEmail()));
 			mail.setSubject("Unlock Account");
 			mail.setContent(getLockAccEmailBody(user), "text/html; charset=utf-8");
 			mailsender.send(mail);

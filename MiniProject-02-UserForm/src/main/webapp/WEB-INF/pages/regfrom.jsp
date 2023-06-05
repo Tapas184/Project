@@ -20,21 +20,21 @@
 		<table>
 			<tr>
 				<td>First Name :</td>
-				<td><frm:input path="fname" title="Enter First Name" /></td>
+				<td><frm:input path="fname" title="Enter First Name" placeholder="First Name"/></td>
 			</tr>
 			<tr>
 				<td>Last Name :</td>
-				<td><frm:input path="lname" title="Enter last name" /></td>
+				<td><frm:input path="lname" title="Enter last name" placeholder="last Name"/></td>
 			</tr>
 			<tr>
 				<td>Email :</td>
-				<td><frm:input path="email" title="Enter Email Address" /> 
+				<td><frm:input path="email" title="Enter Email Address" placeholder="Email Address"/> 
 						<span id="dupmail" style="color: red"></span>
 				</td>
 			</tr>
 			<tr>
 				<td>PhoneNo :</td>
-				<td><frm:input path="phno" title="Enter Phone Number" /></td>
+				<td><frm:input path="phno" title="Enter Phone Number" placeholder="Phone Number" /></td>
 			</tr>
 			<tr>
 				<td>Gender :</td>
@@ -44,7 +44,7 @@
 			<tr>
 				<td>Date Of Birth :</td>
 				<td>
-				<frm:input path="dob"/>
+				<frm:input path="dob" placeholder="dd-MM-yyyy"/>
 				</td>
 			</tr>
 			<tr>

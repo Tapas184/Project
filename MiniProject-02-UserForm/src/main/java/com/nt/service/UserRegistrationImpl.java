@@ -65,11 +65,12 @@ public class UserRegistrationImpl implements UserRegistrationInterface {
 		try {
 			if (user.getId() == null) {
 				user.setPwd(TempPassWrd.genTempPass(6));
-				uid = repo.save(user).getId();
 				boolean sendMail = email.sendMail(user);
-				if (sendMail)
+				if (sendMail) {
+					uid = repo.save(user).getId();
 					return "User almost registered, Kindly set passwored for your account id is," + uid + "<br>"
 							+ "Kinly check your mail and and activate your account";
+				}
 				else
 					throw new ProblemInMailSend("Problem In Mail send");
 			}
@@ -112,7 +113,7 @@ public class UserRegistrationImpl implements UserRegistrationInterface {
 		cityList.forEach(city -> map.put(city.getCityid(), city.getCityname()));
 		return map;
 	}// city info
-	
+
 	@Override
 	public UserEntity findUserByMail(String mail) {
 		return repo.findByEmail(mail);

@@ -12,6 +12,7 @@ public class StringConstatnt {
 	public static final String WRONG_ID_PASSWORD="<<Failed in login kindly input correct ID and password>>";
 	public static final String ERROR_EXECUTION_STARTED="<<Error:>>";
 	public static final String EMAIL_NOT_FOUND="<<Given Email NotFound>>";
+	public static final String STATUS_LOCKED="Your account is not active yet, Kindly active with temporary password";
 
 	
 }

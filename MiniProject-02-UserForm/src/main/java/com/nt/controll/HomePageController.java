@@ -6,7 +6,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +14,7 @@ import com.nt.constant.StringConstatnt;
 import com.nt.entity.UserEntity;
 import com.nt.model.AccountLogin;
 import com.nt.model.ForgotPwd;
+import com.nt.passwordutils.IpasswordUtils;
 import com.nt.random.TempPassWrd;
 import com.nt.service.UserRegistrationInterface;
 import com.nt.service.smsservice.SmsInterface;
@@ -30,7 +30,9 @@ public class HomePageController {
 	private UserRegistrationInterface service;
 	@Autowired
 	private SmsInterface smsservice;
-
+	@Autowired
+	private IpasswordUtils pass;
+	
 	@GetMapping("/")
 	public String showHomePage(@ModelAttribute("acc") AccountLogin acc) {
 		log.info(StringConstatnt.METHOD_EXECUTION_START+"showHomePage");
@@ -41,19 +43,15 @@ public class HomePageController {
 	public String afterLogin(@ModelAttribute("acc") AccountLogin acc, 
 			                Map<String, Object> map) {
 		log.info(StringConstatnt.METHOD_EXECUTION_START);
-		int s;
 		try {
 			log.debug(StringConstatnt.DEBUG_EXECUTION_STARTED);
 			UserEntity user = service.findUserByMail(acc.getEmail()); // call the service calss
-			if (user != null && acc.getPassword().equals(user.getPwd())) {
+			String pwd = pass.decryption(user.getPwd());
+			if (acc.getPassword().equals(pwd)) {
 				String successMsg = "SuccessFully loggedIn" + user.getFname();// string msg
-				s=1;
-				map.put("s", s);
 				map.put("successMsg", successMsg);
 				 // kept success message in model view
 			} else {
-				s=2;
-				map.put("s", s);
 				// else condition failed
 				String failuerMsg = StringConstatnt.WRONG_ID_PASSWORD; // failed message
 				map.put("failuerMsg", failuerMsg);
@@ -85,6 +83,10 @@ public class HomePageController {
 			UserEntity user = service.findUserByMail(frgt.getEmail()); // get user by mail
 			ses.setAttribute("userMail", frgt.getEmail()); // kept mail into the HTTPsession attributes
 			if (user != null) {
+				if(user.getStatus().equalsIgnoreCase("locked")) {
+				map.put("status", StringConstatnt.STATUS_LOCKED);
+				return "success";
+				}
 				PhoneNumber to = new PhoneNumber("+91" + user.getPhno().toString()); // Create a phone object and																	// passing user phone number
 				String otp = TempPassWrd.otp(); // generate oTp
 				ses.setAttribute("otp", otp); // kept otp in HTTP session

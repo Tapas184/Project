@@ -59,7 +59,7 @@ public class UserEntity implements Serializable {
 	@Column(name = "Status", length = 15)
 	private String status="Locked";
 	
-	@Column(name = "User_PWD", length = 10)
+	@Column(name = "User_PWD", length = 100)
 	private String pwd;
 	
 	@Column(name = "Country_Id")

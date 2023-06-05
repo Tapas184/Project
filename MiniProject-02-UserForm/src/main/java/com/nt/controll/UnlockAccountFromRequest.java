@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.nt.constant.StringConstatnt;
 import com.nt.entity.UserEntity;
 import com.nt.model.UnlockAccount;
+import com.nt.passwordutils.IpasswordUtils;
 import com.nt.service.UserRegistrationInterface;
 
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +25,8 @@ public class UnlockAccountFromRequest {
 
 	@Autowired
 	private UserRegistrationInterface service;
+	@Autowired
+	private IpasswordUtils pass;
 
 	@GetMapping("/unlockaccount")
 	public String unlockAcc(@ModelAttribute("acc") UnlockAccount acc, @RequestParam("email") String email,
@@ -40,7 +43,6 @@ public class UnlockAccountFromRequest {
 	@PostMapping("/unlockAcc")
 	public String postUnlockAcc(@ModelAttribute("acc") UnlockAccount acc, HttpSession ses, Map<String, Object> map) {
 		log.info(StringConstatnt.ERROR_EXECUTION_STARTED + " postUnlockAcc");
-		int s;
 		try {
 			log.debug(StringConstatnt.DEBUG_EXECUTION_STARTED);
 			// get Mail id from session Attributes
@@ -52,11 +54,9 @@ public class UnlockAccountFromRequest {
 			// check whether actual password and user put temporary password is same or not
 			if (pwd.equals(acc.getTemPwd())) {
 				// true : set user password with new password
-				user.setPwd(acc.getNewPwd());
+				user.setPwd(pass.encryption(acc.getConfrmPwd()));
 				// change user status
 				user.setStatus("UNLOCKED");
-				s=3;
-				map.put("s", s);
 				// call the user insert method
 				String result = service.userInsert(user);
 				// kept the result in Model
@@ -64,8 +64,6 @@ public class UnlockAccountFromRequest {
 				// return LVN
 				return "success";
 			} else {
-				s=4;
-				map.put("s", s);
 				// false: showing wrong message
 				String wrong = "Temporary password is wrong";
 				map.put("wrongpass", wrong);
@@ -73,7 +71,7 @@ public class UnlockAccountFromRequest {
 				log.debug(StringConstatnt.DEBUG_EXECUTION_ENDED);
 			}
 		} catch (Exception e) {
-			log.error(StringConstatnt.ERROR_EXECUTION_STARTED+e.getMessage());
+			log.error(StringConstatnt.ERROR_EXECUTION_STARTED + e.getMessage());
 		}
 		// return LVN
 		return "error";

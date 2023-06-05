@@ -9,6 +9,7 @@
 <body>
     <span style="color: green">${msg}</span> <br>
     <br>
-    <a href="reg"><button>Registration Page</button></a>
+    <a href="reg"><button>Registration Page</button></a> &nbsp; &nbsp; &nbsp; &nbsp;
+    <a href="./"><button>Home</button></a>
 </body>
 </html>

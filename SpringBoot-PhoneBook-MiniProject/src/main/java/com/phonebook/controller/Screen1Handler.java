@@ -1,4 +1,4 @@
-package com.phonebook.Controller;
+package com.phonebook.controller;
 
 
 import javax.servlet.http.HttpSession;

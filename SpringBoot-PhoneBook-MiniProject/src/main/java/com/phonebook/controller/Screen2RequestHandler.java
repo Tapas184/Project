@@ -1,4 +1,4 @@
-package com.phonebook.Controller;
+package com.phonebook.controller;
 
 import java.util.List;
 //import java.util.Map;

@@ -16,7 +16,6 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.annotations.Where;
 
 import lombok.Data;
 
@@ -24,7 +23,6 @@ import lombok.Data;
 @Entity
 @Table(name = "CW_AND_ADMIN_MANAGEMENT_DB")
 @SQLDelete(sql = "UPDATE CW_AND_ADMIN_MANAGEMENT_DB SET status=INACTIVE WHERE userid=?")
-@Where(clause = "status!=INACTIVE")
 public class EntityForAdmin implements Serializable{
 	
 	/**

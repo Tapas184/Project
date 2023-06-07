@@ -6,10 +6,8 @@ import java.util.List;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import ch.qos.logback.core.filter.Filter;
 import fis.his.case_workers_management.entity.EntityForAdmin;
 import fis.his.case_workers_management.entity.EntityForCw;
 import fis.his.case_workers_management.model.CwAndAdPojo;

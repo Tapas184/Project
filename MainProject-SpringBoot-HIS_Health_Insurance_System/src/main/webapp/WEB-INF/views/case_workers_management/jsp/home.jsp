@@ -12,6 +12,12 @@
 	<br>
 	<div style="color: green;">${loginSuccMsg}</div>
 	<div style="text-align: right; color: green;">Login Name :${userName}</div>
+	<br>
+	 <div style="text-align: center;">
+	    <a href="/admin$cw$edit/getalldetails">
+	      <button>All CW And Admin List</button>
+	    </a> 
+	</div>
 	<h2 style="text-align: center;">
 		<a href="newregistration" ><button>New Registration</button></a>
 	</h2>

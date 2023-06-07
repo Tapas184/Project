@@ -12,12 +12,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import static fis.his.case_workers_management.constant.LogConstant.*;
 import fis.his.case_workers_management.model.CwAndAdPojo;
 import fis.his.case_workers_management.service.adminandcw.AdminAndCwServiceInterface;
 import fis.his.case_workers_management.utils.password.IPasswordUtils;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequestMapping("/userlogin")
+@Slf4j
 public class LoginController {
 
 	@Autowired
@@ -28,6 +31,7 @@ public class LoginController {
 	
 	@GetMapping("/loginhome")
 	public String loginHome(@ModelAttribute("logindata")CwAndAdPojo pojo) {
+		log.info(METHOD_EXECUTION_STARTED+" loginHome");
 		return"case_workers_management/login/homepage";
 	}
 	
@@ -36,6 +40,7 @@ public class LoginController {
 			                HttpSession ses,
 			                RedirectAttributes redirect,
 			                Map<String, Object> map) throws Exception {
+		log.info(METHOD_EXECUTION_STARTED+" postLogin");
 		CwAndAdPojo user = service.getuser(pojo.getEmailid());
 		String userPass = pass.decryption(user.getPwd());
 		if(pojo.getPwd().equals(userPass)) {
@@ -47,6 +52,8 @@ public class LoginController {
 		}
 		String errorMsg = "Incorect password";
 		ses.setAttribute("errorMsg", errorMsg);
+		log.info(METHOD_EXECUTION_ENDED);
 		return "case_workers_management/login/error";
 	}
+	
 }

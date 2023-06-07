@@ -12,17 +12,17 @@ import fis.his.case_workers_management.model.CwAndAdPojo;
 import fis.his.case_workers_management.service.adminandcw.AdminAndCwServiceInterface;
 
 @Controller
-@RequestMapping("admin$cw$edit")
+@RequestMapping("/admin$cw$edit")
 public class AdminAndCwAccountEditController {
 	
 	@Autowired
 	private AdminAndCwServiceInterface service;
 	
-	@GetMapping("/getall")
+	@GetMapping("/getalldetails")
 	public String getAllUser(Map<String, Object> map) {
 		List<CwAndAdPojo> userList = service.getAllData();
 		map.put("userlist", userList);
-		return null;
+		return "case_workers_management/editjsp/getalldata";
 	}
 
 }

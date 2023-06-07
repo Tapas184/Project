@@ -15,7 +15,6 @@
 	<frm:form action="addcontact" method="post" modelAttribute="contact">
 		<table
 			style="background-color: pink; margin-left: auto; margin-right: auto; border: solid;">
-
 			<tr style="background-color: yellow; text-align: center;">
 				<td colspan="2" style="border: solid;">Contact</td>
 			</tr>

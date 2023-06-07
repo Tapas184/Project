@@ -1,8 +1,6 @@
 package com.nt.passwordutils;
 
-import java.util.Arrays;
 import java.util.Base64;
-import java.util.UUID;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;

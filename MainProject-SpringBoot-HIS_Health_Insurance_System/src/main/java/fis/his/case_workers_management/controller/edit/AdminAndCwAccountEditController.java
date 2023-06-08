@@ -14,11 +14,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import static fis.his.case_workers_management.constant.LogConstant.*;
+
+import fis.his.case_workers_management.customexception.ExceptionInAccountActive;
+import fis.his.case_workers_management.customexception.ExceptionInSetAccountInactive;
 import fis.his.case_workers_management.model.CwAndAdPojo;
 import fis.his.case_workers_management.service.adminandcw.AdminAndCwServiceInterface;
 import fis.his.case_workers_management.service.role.RolesServiceInterface;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
+@Slf4j
 @RequestMapping("/admin$cw$edit")
 public class AdminAndCwAccountEditController {
 	
@@ -30,6 +36,7 @@ public class AdminAndCwAccountEditController {
 	
 	@GetMapping("/getalldetails")
 	public String getAllUser(Map<String, Object> map) {
+		log.info(METHOD_EXECUTION_STARTED+"-getAllUser");
 		List<CwAndAdPojo> userList = service.getAllData();
 		map.put("userlist", userList);
 		return "case_workers_management/editjsp/getalldata";
@@ -54,19 +61,42 @@ public class AdminAndCwAccountEditController {
 			               RedirectAttributes redirect) {
 		String result = service.postEditAccountUpdate(pojo);
 		redirect.addFlashAttribute("editResult", result);
-		return "redirect:getalldetails";
+		return REDIRECT_GETALLCW_ADMIN_LIST;
 	}
 	
 	@GetMapping("/unlock")
 	public String unlockAccount(@RequestParam("id") Integer id,
-			                    RedirectAttributes redirect) throws Exception {
+			                    RedirectAttributes redirect)  {
 		String result = service.unlockAccount(id);
 		if(result!=null) {
 			redirect.addFlashAttribute("unlocksuccessmsg", result);
-			return"redirect:getalldetails";
-		}
-		String unlockErrorMsg = "Problem in sending mail";
+			return REDIRECT_GETALLCW_ADMIN_LIST;
+		   }
+		String unlockErrorMsg = MAIL_SENT_FAILD_MSG;
 		redirect.addFlashAttribute("unlockerrormsg", unlockErrorMsg);
-		return "redirect:getalldetails";
+		return REDIRECT_GETALLCW_ADMIN_LIST;
+	}
+	
+	@GetMapping("/delete")
+	public String deleteAccount(@RequestParam("id") Integer id,
+			                  RedirectAttributes redirect) {
+		try {
+		String deleteAccountMsg = service.accountSetInactive(id);
+		redirect.addFlashAttribute("deleteAccountMsg", deleteAccountMsg);
+		}catch (ExceptionInSetAccountInactive e) {
+			e.getMessage();
+		}
+		return REDIRECT_GETALLCW_ADMIN_LIST;
+	}
+	@GetMapping("/active")
+	public String activeAccount(@RequestParam("id") Integer id,
+			                    RedirectAttributes redirect) {
+		try {
+		String activeAccountMsg = service.accountActivate(id);
+		redirect.addFlashAttribute("activeAccountMsg", activeAccountMsg);
+		}catch (ExceptionInAccountActive e) {
+			e.getMessage();
+		}
+		return REDIRECT_GETALLCW_ADMIN_LIST;
 	}
 }

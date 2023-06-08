@@ -27,6 +27,7 @@
 					<th>Action</th>
 				</tr>
 			<t:forEach items="${userlist}" var="c" varStatus="Index">
+			   <tr>
 					<td>${Index.count}</td>
 					<td>${c.fname}&nbsp;${c.lname}</td>
 					<td>${c.emailid}</td>
@@ -35,22 +36,23 @@
 					<td>${c.status}</td>
 					<ins hidden="${c.userid}"></ins>
 				<t:choose>
-					<t:when test="${c.status == 'LOCKED'|| c.status == 'LOCK'|| c.status == 'lock'}">
-						<td><a href="edit?id=${c.userid}"><button>Edit</button></a> &nbsp;&nbsp; 
+					<t:when test="${c.status == 'LOCKED'|| c.status == 'LOCK'|| c.status == 'lock' || c.status == 'locked' || c.status == 'Locked'}">
+						<td><a href="edit?id=${c.userid}"><button>Edit</button></a>&nbsp;&nbsp; 
 						    <a href="unlock?id=${c.userid}"><button>Unlock</button></a>
 						</td>
 					</t:when>
-					<t:when test="${c.status == 'INACTIVE'|| c.status == 'inactive'}">
-						<td><a href="edit?id=${c.userid}"><button>Edit</button> </a>&nbsp; &nbsp;
+					<t:when test="${c.status == 'INACTIVE'|| c.status == 'inactive' || c.status == 'Inactive'}">
+						<td><a href="edit?id=${c.userid}"><button>Edit</button></a>&nbsp;&nbsp;
 						    <a href="active?id=${c.userid}"><button>Active</button></a>
 						</td>
 					</t:when>
 					<t:otherwise>
-						<td><a href="edit?id=${c.userid}"><button>Edit</button> </a> &nbsp;&nbsp;
+						<td><a href="edit?id=${c.userid}"><button>Edit</button></a>&nbsp;&nbsp;
 						    <a href="delete?id=${c.userid}" onclick="return confirm('Are you sure want to Inactive this Id :${c.userid}')"><button>Delete</button></a>
 						</td>
 					</t:otherwise>
 				</t:choose>	
+			</tr>
 			</t:forEach>
 			</table>
 		</t:when>
@@ -61,6 +63,8 @@
 	<div style="color: green; text-align: center;">${editResult}</div>
 	<div style="color: green; text-align: center;">${unlocksuccessmsg}</div>
 	<div style="color: green; text-align: center;">${unlockerrormsg}</div>
+	<div style="color: green; text-align: center;">${deleteAccountMsg}</div>
+	<div style="color: green; text-align: center;">${activeAccountMsg}</div>
 	<hr>
 	<div style="text-align: center;">
 	   <a href="/registration/home"><button>Home</button></a>&nbsp; &nbsp;

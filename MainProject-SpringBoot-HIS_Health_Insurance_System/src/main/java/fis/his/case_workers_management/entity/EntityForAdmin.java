@@ -22,7 +22,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "CW_AND_ADMIN_MANAGEMENT_DB")
-@SQLDelete(sql = "UPDATE CW_AND_ADMIN_MANAGEMENT_DB SET status=INACTIVE WHERE userid=?")
+@SQLDelete(sql = "UPDATE CW_AND_ADMIN_MANAGEMENT_DB SET STATUS='INACTIVE' WHERE USER_ID=?")
 public class EntityForAdmin implements Serializable{
 	
 	/**

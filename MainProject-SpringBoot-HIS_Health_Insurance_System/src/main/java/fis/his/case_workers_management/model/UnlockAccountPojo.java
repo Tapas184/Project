@@ -10,4 +10,5 @@ public class UnlockAccountPojo {
 	private String newpassword;
 	private String confpassword;
 	private String tempass;
+	private String otp;
 }

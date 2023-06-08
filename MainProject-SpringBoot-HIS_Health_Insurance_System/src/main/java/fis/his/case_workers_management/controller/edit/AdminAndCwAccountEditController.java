@@ -70,10 +70,10 @@ public class AdminAndCwAccountEditController {
 		String result = service.unlockAccount(id);
 		if(result!=null) {
 			redirect.addFlashAttribute("unlocksuccessmsg", result);
-			return REDIRECT_GETALLCW_ADMIN_LIST;
-		   }
+		   }else {
 		String unlockErrorMsg = MAIL_SENT_FAILD_MSG;
 		redirect.addFlashAttribute("unlockerrormsg", unlockErrorMsg);
+		   }
 		return REDIRECT_GETALLCW_ADMIN_LIST;
 	}
 	

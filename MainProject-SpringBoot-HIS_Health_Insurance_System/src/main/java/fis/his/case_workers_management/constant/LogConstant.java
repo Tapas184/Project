@@ -20,5 +20,6 @@ public   class LogConstant {
 	public static final String MAIL_SENT_FAILD_MSG="Problem in sending mail";
 	public static final String TEMPORARY_PASSWORD_LENGTH="temporarypassword.length";
 	public static final String USER_NOT_FOUND="User not found";
+	public static final String SES_MAILID="mailid";
 
 }

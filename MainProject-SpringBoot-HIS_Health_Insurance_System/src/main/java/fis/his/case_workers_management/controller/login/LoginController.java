@@ -1,10 +1,5 @@
 package fis.his.case_workers_management.controller.login;
 
-import static fis.his.case_workers_management.constant.LogConstant.METHOD_EXECUTION_ENDED;
-import static fis.his.case_workers_management.constant.LogConstant.METHOD_EXECUTION_STARTED;
-import static fis.his.case_workers_management.constant.LogConstant.TEMPORARY_PASSWORD_LENGTH;
-import static fis.his.case_workers_management.constant.LogConstant.USER_NOT_FOUND;
-
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -21,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.twilio.type.PhoneNumber;
 
+import static fis.his.case_workers_management.constant.LogConstant.*;
 import fis.his.case_workers_management.customexception.ExceptionInFounduser;
 import fis.his.case_workers_management.model.CwAndAdPojo;
 import fis.his.case_workers_management.model.UnlockAccountPojo;
@@ -65,6 +61,12 @@ public class LoginController {
 		CwAndAdPojo user = service.getuser(pojo.getEmailid());
 		String userPass = pass.decryption(user.getPwd());
 		if(pojo.getPwd().equals(userPass)) {
+			if(user.getStatus().equalsIgnoreCase("locked") || user.getStatus().equalsIgnoreCase("lock")
+					|| user.getStatus().equalsIgnoreCase("inactive")) {
+				String errorMsg = "Your account locked kidly unlock";
+				redirect.addFlashAttribute("errorMsg", errorMsg);
+				return"redirect:loginhome";
+			}
 			String loginSuccMsg = "Login Successfull.";
 			redirect.addFlashAttribute("loginSuccMsg", loginSuccMsg);
 			String userName= user.getFname()+" "+user.getLname();
@@ -86,12 +88,13 @@ public class LoginController {
 	public String restPasswored(@ModelAttribute("frgt") CwAndAdPojo pojo,
 			                    HttpSession ses
 			                    ) throws Exception {
+		log.info(METHOD_EXECUTION_STARTED+"-restPasswored");
 		CwAndAdPojo user1 = service.getuser(pojo.getEmailid());
 		if(user1.getUserid()!=null) {
 			boolean sentTempass = service.resetpassword(user1);
 			if(sentTempass) {
 				CwAndAdPojo user = service.getuser(user1.getEmailid());
-				mail.sendMail(user);
+				mail.sendMailForRestPawword(user);
 				PhoneNumber number = new PhoneNumber("+91"+user.getPhnumber());
 				int otp = RandomPassGenerator.otp(Integer.parseInt(env.getProperty(TEMPORARY_PASSWORD_LENGTH)));
 				String body = "Your account reset otp(One time password) is "+otp+" Please do not share any one,"
@@ -103,6 +106,7 @@ public class LoginController {
 				ses.setAttribute("mailid", mailId);
 				ses.setAttribute("phno", phoneNumber);
 				ses.setAttribute("tempasssentmail", mailId);
+				log.info(METHOD_EXECUTION_ENDED);
 				return"redirect:passwordResetUrl";
 			}
 			throw new IllegalAccessError();
@@ -122,11 +126,13 @@ public class LoginController {
 			                   HttpSession ses,
 			                   RedirectAttributes redirect,
 			                   Map<String, Object> map) {
+		log.info(METHOD_EXECUTION_STARTED+"-postEnterOtp");
 		String otp = (String)ses.getAttribute("otp");
 		ses.removeAttribute("otp");
-		String mailId = (String)ses.getAttribute("mailid");
+		String mailId = (String)ses.getAttribute(SES_MAILID);
 		CwAndAdPojo user = service.getuser(mailId);
 		if(pojo.getTempass().equals(user.getPwd()) && pojo.getOtp().equals(otp)) {
+			log.info(METHOD_EXECUTION_ENDED);
 			return "redirect:setpassword";
 		}
 		String errorOTP = "Entered otp are wrong";
@@ -137,23 +143,29 @@ public class LoginController {
 	@GetMapping("/setpassword")
 	public String newPasswordSet(@ModelAttribute("model") UnlockAccountPojo pojo,
 			                     HttpSession ses) {
+		log.info(METHOD_EXECUTION_STARTED+"-newPasswordSet");
 		String userMail = (String)ses.getAttribute("mailid");
 		pojo.setMail(userMail);
+		log.info(METHOD_EXECUTION_ENDED);
 		return "case_workers_management/login/addNewPassword";
 	}
 	
 	@PostMapping("/postAddNewPassword")
 	public String postSetNewPassword(@ModelAttribute("model") UnlockAccountPojo pojo,
 			                          HttpSession ses) throws Exception {
+		log.info(MTHOD_DEBUG_STARTED+"-postSetNewPassword");
 		CwAndAdPojo user = service.getuser(pojo.getMail());
 		user.setPwd(pass.encryption(pojo.getConfpassword()));
 		String result = service.accountUpdate(user);
 		ses.setAttribute("resetpasswordMsg", result);
+		log.info(METHOD_EXECUTION_ENDED);
 		return "redirect:susurl";
 	}
 	@GetMapping("/susurl")
 	public String redirectUrl(Model model, HttpSession ses) {
+		log.info(METHOD_EXECUTION_STARTED+"-redirectUrl");
 		model.addAttribute("resultMsg", ses.getAttribute("resetpasswordMsg"));
+		log.info(METHOD_EXECUTION_ENDED);
 		return "case_workers_management/login/passwordrestsuccesspage";
 	}
 }

@@ -16,6 +16,9 @@
 	<frm:form action="postreg" method="POST" modelAttribute="emp">
 		<table style="margin-left: auto; margin-right: auto;">
 		    <caption>Registration Form</caption>
+		    <tr>
+		      <th colspan="2" style="color: yellow;text-align: center;">Registration</th>
+		    </tr>
 			<tr>
 				<td>First Name :</td>
 				<td><frm:input path="fname" placeholder="First Name" /></td>

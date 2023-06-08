@@ -3,15 +3,19 @@
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="frm"%>
 <!DOCTYPE html>
-<html>
+<html lang="txt/html">
 <head>
 <meta charset="ISO-8859-1">
 <title>Login Page</title>
 </head>
 <body>
 	<frm:form action="postlogin" method="POST" modelAttribute="logindata">
-		<div style="text-align: center; color: blue;">Login Form</div>
-		<table style="margin: auto;">
+	   <div style="color: red; text-align: center;">${errorMsg}</div>
+		<table style="margin: auto; border: solid;">
+		 <caption>Login Page</caption>
+		  <tr>
+		     <th colspan="2" style="text-align: center; background-color: yellow;">Login</th>
+		  </tr>
 			<tr>
 				<td>User Id :</td>
 				<td><frm:input path="emailid" placeholder="Username" /></td>

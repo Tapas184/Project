@@ -56,4 +56,41 @@ public class MailUtilsImpl implements MailInterface {
 		return null;
 	}
 
+	@Override
+	public boolean sendMailForRestPawword(CwAndAdPojo pojo) throws Exception {
+
+		try {
+			MimeMessage mail = mailsender.createMimeMessage();
+			mail.setFrom(new InternetAddress("routtapas1995@gmail.com"));
+			mail.setRecipient(RecipientType.TO, new InternetAddress(pojo.getEmailid()));
+			mail.setSubject("Unlock Account");
+			mail.setContent(passwordRestEmailBody(pojo), "text/html; charset=utf-8");
+			mailsender.send(mail);
+			return true;
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+			return false;
+	}
+	
+	private String passwordRestEmailBody(CwAndAdPojo pojo) throws IOException {
+		FileReader file = new FileReader("PassWord_Reset_Mail_Body.html");
+		StringBuilder sb = new StringBuilder();
+		try(BufferedReader br = new BufferedReader(file)){
+		String readLine = br.readLine();
+		
+		while(readLine!=null) {
+			sb.append(readLine);
+			readLine=br.readLine();
+		}
+		return sb.toString().replace("{fname}", pojo.getFname())
+		   .replace("{lname}", pojo.getLname())
+		   .replace("{pwd}", pojo.getPwd());
+		
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

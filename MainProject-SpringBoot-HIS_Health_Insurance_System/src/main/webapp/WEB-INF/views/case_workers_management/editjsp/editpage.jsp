@@ -14,6 +14,9 @@
 		<table style="margin-left: auto; margin-right: auto;">
 		    <caption>Registration Form</caption>
 		    <tr>
+		      <th colspan="1" style="text-align: center;border: solid; background-color: yellow;">Registration</th>
+		    </tr>
+		    <tr>
 				<td>User Id :</td>
 				<td><frm:input path="userid" readonly="true"/></td>
 			</tr>

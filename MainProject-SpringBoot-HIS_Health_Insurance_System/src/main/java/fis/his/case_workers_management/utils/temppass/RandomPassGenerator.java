@@ -6,6 +6,11 @@ import java.util.UUID;
 
 public class RandomPassGenerator {
 	
+	private RandomPassGenerator() {
+		super();
+	}
+
+	public static final Random randam = new Random();
           private static     String str = UUID.randomUUID()
             		   .toString()
             		   .replace("-", "");
@@ -13,7 +18,7 @@ public class RandomPassGenerator {
 	public static String temppassGen(int length) {
 		StringBuilder sb = new StringBuilder();
 		for(int i=0; i<length; i++) {
-			sb.append(str.charAt(new Random().nextInt(str.length()-1)));
+			sb.append(str.charAt(randam.nextInt(str.length()-1)));
 		}
 		return sb.toString();
 	}
@@ -21,13 +26,14 @@ public class RandomPassGenerator {
 	public static int otp(int length) {
 		StringBuilder sb = new StringBuilder();
 		for(int i=0; i<length;i++) {
-			sb.append(new Random().nextInt(9));
+			int nextInt = randam.nextInt(9);
+			sb.append(nextInt);
 		}
 		return Integer.parseInt(sb.toString());
 	}
 
 	public static int otpGen() {
 		return Integer.parseInt( new DecimalFormat("000000")
-				.format(new Random().nextInt(999999)));
+				.format(randam.nextInt(999999)));
 	}
 }

@@ -13,6 +13,9 @@
 	   <span style="margin: auto;">${errorMsg}</span>
 		<table style="margin: auto;">
 		<caption>Unlock Account</caption>
+		   <tr>
+		     <th colspan="2" style="color: yellow; text-align: center;">Unlock Account</th>
+		    </tr>
 			<tr>
 				<td>Name :</td>
 				<td>${fname}&nbsp; &nbsp;${lname}</td>

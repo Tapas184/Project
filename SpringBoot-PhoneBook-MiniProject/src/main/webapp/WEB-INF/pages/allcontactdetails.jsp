@@ -14,7 +14,7 @@
 				style="margin-left: auto; margin-right: auto; background-color: pink;"
 				border="1">
 				<caption></caption>
-				<tr style="color: blue; text-align: center;">
+				<tr style="color: yellow; text-align: center;">
 					<th>Sl_No</th>
 					<th>Name</th>
 					<th>Email_Id</th>

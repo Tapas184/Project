@@ -15,5 +15,11 @@ public interface AdminAndCwServiceInterface {
 	public String accountUpdate(CwAndAdPojo pojo);
 	
 	public List<CwAndAdPojo> getAllData();
+	
+	public CwAndAdPojo getUserById(Integer id);
+	
+	public String postEditAccountUpdate(CwAndAdPojo pojo);
+	
+	public String unlockAccount(Integer id) throws Exception;
 
 }

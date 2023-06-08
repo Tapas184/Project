@@ -2,6 +2,7 @@ package fis.his.case_workers_management.service.adminandcw;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,6 +101,49 @@ public class AdminAndCWServiceImpl implements AdminAndCwServiceInterface {
 		         });
 		        
 		return pojoList;
+	}//
+	
+	@Override
+	public CwAndAdPojo getUserById(Integer id) {
+		Optional<EntityForAdmin> user = adminRepo.findById(id);
+		if(user.isPresent()) {
+			CwAndAdPojo pojo= new CwAndAdPojo();
+			BeanUtils.copyProperties(user.get(), pojo);
+			return pojo;
+		}	
+		return null;
+	}
+	
+	@Override
+	public String postEditAccountUpdate(CwAndAdPojo pojo) {
+		 Optional<EntityForAdmin> user = adminRepo.findById(pojo.getUserid());
+		 if(user.isPresent()) {
+			 EntityForAdmin admin = user.get();
+			 admin.setFname(pojo.getFname());
+			 admin.setLname(pojo.getLname());
+			 admin.setPhnumber(pojo.getPhnumber());
+			 admin.setRole(pojo.getRole());
+			 adminRepo.save(admin);
+			 return admin.getUserid()+"Acount updated successfully";
+		 }
+		 
+		return null;
+	}
+	
+	@Override
+	public String unlockAccount(Integer id) throws Exception {
+		Optional<EntityForAdmin> opt = adminRepo.findById(id);
+		if(opt.isPresent()) {
+			EntityForAdmin user = opt.get();
+			user.setPwd(RandomPassGenerator.temppassGen(Integer.parseInt(env.getProperty("temporarypassword.length"))));
+			adminRepo.save(user);
+			CwAndAdPojo pojo = new CwAndAdPojo();
+			BeanUtils.copyProperties(user, pojo);
+			boolean sendMail = mail.sendMail(pojo);
+			if(sendMail)
+				return "Mail sent to registed email, please visit the mail and unlock the account";	
+		}
+		return null;
 	}
 }
 

@@ -1,9 +1,16 @@
 package fis.his.case_workers_management.model;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 @Data
-public class CwAndAdPojo {
+public class CwAndAdPojo implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7448631672435142959L;
 
 	private Integer userid;
 	

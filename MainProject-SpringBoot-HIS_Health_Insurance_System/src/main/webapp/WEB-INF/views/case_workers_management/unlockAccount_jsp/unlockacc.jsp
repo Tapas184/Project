@@ -12,6 +12,7 @@
 	<frm:form action="postunlock" method="POST" modelAttribute="unlockpojo">
 	   <span style="margin: auto;">${errorMsg}</span>
 		<table style="margin: auto;">
+		<caption>Unlock Account</caption>
 			<tr>
 				<td>Name :</td>
 				<td>${fname}&nbsp; &nbsp;${lname}</td>

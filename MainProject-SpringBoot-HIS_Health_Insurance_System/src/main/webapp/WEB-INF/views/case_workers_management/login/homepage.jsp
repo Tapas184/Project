@@ -17,7 +17,7 @@
 		</tr>
 		<tr>
 			<td>Password :</td>
-			<td><frm:password path="pwd" placeholder="Password" /></td>
+			<td><frm:password path="pwd" placeholder="Password" showPassword="true"/></td>
 		</tr>
 		<tr>
 			<td colspan="2" style="text-align: center;"><input type="submit"

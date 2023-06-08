@@ -7,6 +7,6 @@
 <title>SuccessFully Unlocked</title>
 </head>
 <body>
- <h1 style="color: green;">${resultmsg}</h1><a href="login">Here</a>
+ <h1 style="color: green;">${resultmsg}</h1><a href="/userlogin/loginhome">Here</a>
 </body>
 </html>

@@ -21,5 +21,8 @@ public   class LogConstant {
 	public static final String TEMPORARY_PASSWORD_LENGTH="temporarypassword.length";
 	public static final String USER_NOT_FOUND="User not found";
 	public static final String SES_MAILID="mailid";
+	public static final String ROLE_STATUS_INACTIVE="Role exist in db kindly active";
+	public static final String ROLE_STATUS_ACTIVE="Role already exist in Data Base";
+	public static final String ROLE_STATUS_REDIRECTMSG="resultMsg";
 
 }

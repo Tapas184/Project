@@ -11,10 +11,10 @@
 <body>
 	<frm:form action="postunlock" method="POST" modelAttribute="unlockpojo">
 	   <span style="margin: auto;">${errorMsg}</span>
-		<table style="margin: auto;">
+		<table style="margin: auto;border: solid;">
 		<caption>Unlock Account</caption>
 		   <tr>
-		     <th colspan="2" style="color: yellow; text-align: center;">Unlock Account</th>
+		     <th colspan="2" style="background-color: yellow; text-align: center;">Unlock Account</th>
 		    </tr>
 			<tr>
 				<td>Name :</td>

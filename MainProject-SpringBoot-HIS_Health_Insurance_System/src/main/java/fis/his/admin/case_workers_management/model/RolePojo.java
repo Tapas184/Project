@@ -7,4 +7,5 @@ public class RolePojo {
 
 	private Integer roleid;
 	private String role;
+	private String roleStatus;
 }

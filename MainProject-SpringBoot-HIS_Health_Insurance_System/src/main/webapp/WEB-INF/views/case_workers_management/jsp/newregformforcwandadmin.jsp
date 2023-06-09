@@ -14,10 +14,10 @@
 		Form</h1>
 		<span style="text-align: center;">${resultmsg}</span>
 	<frm:form action="postreg" method="POST" modelAttribute="emp">
-		<table style="margin-left: auto; margin-right: auto;">
+		<table style="margin-left: auto; margin-right: auto;border: solid;">
 		    <caption>Registration Form</caption>
 		    <tr>
-		      <th colspan="2" style="color: yellow;text-align: center;">Registration</th>
+		      <th colspan="2" style="background-color:yellow ; text-align: center;">Registration</th>
 		    </tr>
 			<tr>
 				<td>First Name :</td>

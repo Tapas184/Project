@@ -10,10 +10,10 @@ $(document).ready(function() {
 			type: "GET",
 			url: "validmail?email=" + emailId,
 			success: function(res) {
-				if (res == 'duplicate') {
+				if (res == 'duplicate') 
 					$("#dupmail").html("Email is already registered");
 					$("#emailid").focus();
-				} //if
+				 //if
 			},//function
 			error: function() {
 				$("#dupmail").html("Problem in data Fetch");

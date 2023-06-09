@@ -1,4 +1,4 @@
-package fis.his.case_workers_management.utils.password;
+package fis.his.admin.case_workers_management.utils.password;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
@@ -13,8 +13,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class PasswordUtilsImpl implements IPasswordUtils {
 	
-	private static final String SECRET_KEY=UUID.randomUUID().toString().substring(0, 16);
-	private static final String INIT_VECTOR=UUID.randomUUID().toString().substring(0, 16);
+	private static final String SECRET_KEY="dhgsdhfjhyldkfit";
+	private static final String INIT_VECTOR="rthdlgyjtopdnhet";
 	@Override
 	public String decryption(String msg) throws Exception {
 		SecretKeySpec secrestSpec = new SecretKeySpec(SECRET_KEY.getBytes(StandardCharsets.UTF_8), "AES");

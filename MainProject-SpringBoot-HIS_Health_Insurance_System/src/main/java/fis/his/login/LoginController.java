@@ -1,4 +1,4 @@
-package fis.his.case_workers_management.controller.login;
+package fis.his.login;
 
 import java.util.Map;
 

@@ -1,13 +1,10 @@
 package fis.his.case_workers_management.utils.password;
 
 import java.nio.charset.StandardCharsets;
-import java.security.SecureRandom;
 import java.util.Base64;
-import java.util.Random;
 import java.util.UUID;
 
 import javax.crypto.Cipher;
-import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 

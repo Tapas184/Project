@@ -34,6 +34,11 @@ public class AdminAndCwAccountEditController {
 	@Autowired
 	private RolesServiceInterface roleService;
 	
+	/**
+	 * 
+	 * @param map
+	 * @return
+	 */
 	@GetMapping("/getalldetails")
 	public String getAllUser(Map<String, Object> map) {
 		log.info(METHOD_EXECUTION_STARTED+"-getAllUser");
@@ -62,6 +67,12 @@ public class AdminAndCwAccountEditController {
 		}
 		return null;
 	}
+	/**
+	 * 
+	 * @param pojo
+	 * @param redirect
+	 * @return
+	 */
 	
 	@PostMapping("/postedit")
 	public String postEdit(@ModelAttribute("editAttribute")CwAndAdPojo pojo,
@@ -70,7 +81,12 @@ public class AdminAndCwAccountEditController {
 		redirect.addFlashAttribute("editResult", result);
 		return REDIRECT_GETALLCW_ADMIN_LIST;
 	}
-	
+	/**
+	 * 
+	 * @param id
+	 * @param redirect
+	 * @return
+	 */
 	@GetMapping("/unlock")
 	public String unlockAccount(@RequestParam("id") Integer id,
 			                    RedirectAttributes redirect)  {
@@ -83,7 +99,12 @@ public class AdminAndCwAccountEditController {
 		   }
 		return REDIRECT_GETALLCW_ADMIN_LIST;
 	}
-	
+	/**
+	 * 
+	 * @param id
+	 * @param redirect
+	 * @return
+	 */
 	@GetMapping("/delete")
 	public String deleteAccount(@RequestParam("id") Integer id,
 			                  RedirectAttributes redirect) {
@@ -95,6 +116,12 @@ public class AdminAndCwAccountEditController {
 		}
 		return REDIRECT_GETALLCW_ADMIN_LIST;
 	}
+	/**
+	 * 
+	 * @param id
+	 * @param redirect
+	 * @return
+	 */
 	@GetMapping("/active")
 	public String activeAccount(@RequestParam("id") Integer id,
 			                    RedirectAttributes redirect) {

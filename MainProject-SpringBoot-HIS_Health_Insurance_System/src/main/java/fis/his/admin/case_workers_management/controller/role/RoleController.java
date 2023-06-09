@@ -24,9 +24,11 @@ public class RoleController {
 	private RolesServiceInterface roleService;
 
 	/**
+	 * {@summary : This method is used for showing role home paage
+	 *              where Admin can create role}
 	 * 
-	 * @param pojo
-	 * @return
+	 * @param pojo : Model Attributes for bind the data
+	 * @return : LVN role$home
 	 */
 
 	@GetMapping("/home")
@@ -35,14 +37,15 @@ public class RoleController {
 	}
 
 	/**
-	 * 
-	 * @param pojo
-	 * @param redirect
+	 * {@summary: This method is used for create role}
+	 * @param pojo : Model Attributes
+	 * @param redirect :Redirect this page to /role/home
 	 * @return
 	 */
 	@PostMapping("/create")
 	public String roleCreatePost(@ModelAttribute("roleM") RolePojo pojo, 
 			                     RedirectAttributes redirect) {
+		log.info(METHOD_EXECUTION_STARTED+"-roleCreatePost");
 		String status = roleService.checkRole(pojo.getRole());
 		if (status != null) {
 			if (status.equalsIgnoreCase("inactive")) {
@@ -56,12 +59,20 @@ public class RoleController {
 			redirect.addFlashAttribute(ROLE_STATUS_REDIRECTMSG, result);
 			}
 		}
+		log.info(METHOD_EXECUTION_ENDED);
 		return "redirect:home";
 	}
+	/**
+	 * {@summary : This method used for sending response body to web page}
+	 * @param role : String
+	 * @return : Response Body
+	 */
 	@GetMapping("/roleCheck")
 	@ResponseBody
 	public String roleExistStatus(@RequestParam("roles") String role) {
+		log.info(METHOD_EXECUTION_STARTED+"-roleExistStatus");
 		String response = roleService.checkRole(role);
+		log.info(METHOD_EXECUTION_ENDED);
 		return response!=null? response.toUpperCase():"UNIQUE";
 	}
 }

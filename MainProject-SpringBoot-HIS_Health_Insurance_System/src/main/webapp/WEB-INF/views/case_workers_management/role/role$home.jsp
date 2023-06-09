@@ -29,5 +29,11 @@
 			</tr>
 		</table>
 	</f:form>
+	<hr>
+	<div style="text-align: center;">
+	   <a href="showRoles">
+	   <button>Show All roles</button>
+	   </a>
+	</div>
 	<script src="../js/rolecheck.js"></script>
 </body>

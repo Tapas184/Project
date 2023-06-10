@@ -14,19 +14,28 @@
 	<div style="text-align: right; color: green;">Login Name
 		:${userName}</div>
 	<br>
-	<div style="text-align: center;">
-		<a href="/admin$cw$edit/getalldetails">
-			<button>All CW And Admin List</button>
-		</a>
-	</div>
-	<h2 style="text-align: center;">
-		<a href="newregistration"><button>New Registration</button></a>
-	</h2>
 	<h3 style="text-align: center;">
-		<a href="/role/home"><button>Roles Management</button></a>
+		<a href="/admin$cw$edit/getalldetails">
+			<button>Show Admin&Cw List</button>
+		</a>
 	</h3>
 	<h3 style="text-align: center;">
-		<a href="/viewRoles/showRoles"><button>Show Roles</button></a>
+		<a href="newregistration"><button>Create Admin/Cw</button></a>
+	</h3>
+	<h3 style="text-align: center;">
+		<a href="/role/home"><button>Create Roles</button></a>
+	</h3>
+	<h3 style="text-align: center;">
+		<a href="/viewRoles/showRoles"><button>View Roles</button></a>
+	</h3>
+	<h3 style="text-align: center;">
+		<a href="/viewRoles/showRoles"><button>View Roles</button></a>
+	</h3>
+	<h3 style="text-align: center;">
+		<a href="/plancreate/create"><button>Create Plan</button></a>
+	</h3>
+	<h3 style="text-align: center;">
+		<a href="/planview/view"><button>View Plan</button></a>
 	</h3>
 </body>
 </html>

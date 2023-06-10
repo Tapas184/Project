@@ -28,12 +28,12 @@
                   <c:choose>
                      <c:when test="${t.roleStatus=='ACTIVE'|| t.roleStatus== 'active'}">
                      <td>
-                         <a href="inactive?id=${t.roleid}"><button style="background-color: red;">Inactive</button></a>
+                         <a href="inactive?id=${t.roleid}"><button style="background-color:rgb(63,255,0);">Active</button></a>
                       </td>
                      </c:when>
                      <c:otherwise>
                        <td>
-                        <a href="active?id=${t.roleid}"><button style="background-color: green;">Active</button></a>
+                        <a href="active?id=${t.roleid}"><button style="background-color:rgb(255,110,74);">In-Active</button></a>
                        </td> 
                      </c:otherwise>
                   </c:choose>

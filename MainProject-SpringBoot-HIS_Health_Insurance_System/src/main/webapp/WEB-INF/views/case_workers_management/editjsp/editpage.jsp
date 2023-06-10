@@ -11,10 +11,10 @@
 		Form</h1>
 		<span style="text-align: center;">${resultmsg}</span>
 	<frm:form action="postedit" method="POST" modelAttribute="editAttribute">
-		<table style="margin-left: auto; margin-right: auto;">
+		<table style="margin-left: auto; margin-right: auto;border: solid;">
 		    <caption>Registration Form</caption>
 		    <tr>
-		      <th colspan="1" style="text-align: center;border: solid; background-color: yellow;">Registration</th>
+		      <th colspan="2" style="text-align: center; border: solid; background-color: yellow;">Registration</th>
 		    </tr>
 		    <tr>
 				<td>User Id :</td>

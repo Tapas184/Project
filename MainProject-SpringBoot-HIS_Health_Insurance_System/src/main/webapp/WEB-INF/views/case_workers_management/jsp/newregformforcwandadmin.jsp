@@ -21,21 +21,21 @@
 		    </tr>
 			<tr>
 				<td>First Name :</td>
-				<td><frm:input path="fname" placeholder="First Name" /></td>
+				<td><frm:input path="fname" placeholder="First Name" required="true"/></td>
 			</tr>
 			<tr>
 				<td>Last Name :</td>
-				<td><frm:input path="lname" placeholder="Last Name" /></td>
+				<td><frm:input path="lname" placeholder="Last Name" required="true"/></td>
 			</tr>
 			<tr>
 				<td>Email address :</td>
-				<td><frm:input path="emailid" placeholder="Email Address" />
+				<td><frm:input path="emailid" placeholder="Email Address" required="true"/>
 				<span id="dupmail" style="color: red"></span>
 				</td>
 			</tr>
 			<tr>
 				<td>Phone Number :</td>
-				<td><frm:input path="phnumber" placeholder="Phone Number" /></td>
+				<td><frm:input path="phnumber" placeholder="Phone Number" required="true"/></td>
 			</tr>
 			<tr>
 				<td>Gender :</td>
@@ -56,6 +56,10 @@
 			</tr>
 		</table>
 	</frm:form>
+	<br>
+	<div style="text-align: center;">
+	   <a href="/registration/home"><button>Home</button></a>
+	</div>
 	<script src="../js/app.js">
 </script>
 </body>

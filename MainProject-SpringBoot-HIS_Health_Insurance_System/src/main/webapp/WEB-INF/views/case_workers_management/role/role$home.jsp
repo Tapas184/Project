@@ -21,7 +21,7 @@
 			</tr>
 			<tr>
 				<td>Role Name :</td>
-				<td><f:input path="role" placeholder="Role" /></td>
+				<td><f:input path="role" placeholder="Role" required="true"/></td>
 			</tr>
 			<tr>
 				<td style="text-align: center;" colspan="2"><input

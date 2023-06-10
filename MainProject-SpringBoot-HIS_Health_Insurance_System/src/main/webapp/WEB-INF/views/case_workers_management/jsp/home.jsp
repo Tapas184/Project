@@ -29,9 +29,6 @@
 		<a href="/viewRoles/showRoles"><button>View Roles</button></a>
 	</h3>
 	<h3 style="text-align: center;">
-		<a href="/viewRoles/showRoles"><button>View Roles</button></a>
-	</h3>
-	<h3 style="text-align: center;">
 		<a href="/plancreate/create"><button>Create Plan</button></a>
 	</h3>
 	<h3 style="text-align: center;">

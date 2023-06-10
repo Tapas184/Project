@@ -10,16 +10,11 @@ $(document).ready(function() {
 			success: function(res) {
 				if (res == 'ACTIVE')
 					$("#error").html("Role already Exist in DB");
+				if (res == 'INACTIVE')
+					$("#error").html("Role Inactive Kindly active");
+				if (res == 'UNIQUE')
+					$("#success").html("You can create role on this name");
 					$("#role").focus();
-				
-				elseif (res == 'INACTIVE') 
-					$("#resultMsg").html("Role Inactive Kindly active");
-					$("#role").focus();
-					
-				elseif(res == 'UNIQUE') 
-				   $("#resultmsg").html("You can create role on this name");
-				   $("#role").focus();
-	
 			},//function
 			error: function() {
 				$("#error").html("Problem in data Fetch");

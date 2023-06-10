@@ -1,6 +1,7 @@
 package fis.his.admin.case_workers_management.controller.regestration;
 
-import static fis.his.admin.case_workers_management.constant.LogConstant.*;
+import static fis.his.admin.case_workers_management.constant.LogConstant.METHOD_EXECUTION_ENDED;
+import static fis.his.admin.case_workers_management.constant.LogConstant.METHOD_EXECUTION_STARTED;
 
 import java.util.List;
 import java.util.Map;
@@ -23,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
-@RequestMapping("/registration")
+@RequestMapping(value =  {"/registration","/"})
 public class RegestrationController {
 	
 	@Autowired
@@ -32,7 +33,7 @@ public class RegestrationController {
 	@Autowired
 	private AdminAndCwServiceInterface adminandcwservice;
 	
-	@GetMapping("/home")
+	@GetMapping(value = {"/home","/"})
 	public String showRegistrationHome() {
 		log.info(METHOD_EXECUTION_STARTED+" showRegistrationHome");
 		log.info(METHOD_EXECUTION_ENDED);

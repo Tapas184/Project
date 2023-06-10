@@ -29,7 +29,7 @@
 			</tr>
 			<tr>
 				<td>Email address :</td>
-				<td><frm:input path="emailid" placeholder="Email Address" required="true"/>
+				<td><frm:input path="emailid" placeholder="Email Address"/>
 				<span id="dupmail" style="color: red"></span>
 				</td>
 			</tr>

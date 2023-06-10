@@ -31,7 +31,7 @@
 	</f:form>
 	<hr>
 	<div style="text-align: center;">
-	   <a href="showRoles">
+	   <a href="/viewRoles/showRoles">
 	   <button>Show All roles</button>
 	   </a>
 	</div>

@@ -54,7 +54,6 @@ public class AdminAndCwAccountEditController {
 		log.info(METHOD_EXECUTION_STARTED + "-getAllUser");
 		//List<CwAndAdPojo> userList = service.getAllData();
 		Page<EntityForAdmin> page = service.findAllDetails(pageable);
-		System.out.println(page.getTotalPages());
 		map.put("page", page);
 		return "case_workers_management/editjsp/getalldata";
 	}

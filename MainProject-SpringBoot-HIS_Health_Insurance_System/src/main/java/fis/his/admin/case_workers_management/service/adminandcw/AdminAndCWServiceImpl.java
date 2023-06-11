@@ -1,20 +1,24 @@
 package fis.his.admin.case_workers_management.service.adminandcw;
 
-import static fis.his.admin.case_workers_management.constant.LogConstant.*;
+import static fis.his.admin.case_workers_management.constant.LogConstant.ACCOUNT_ACTIVATED_MSG;
+import static fis.his.admin.case_workers_management.constant.LogConstant.ACCOUNT_ACTIVE_EXCEPTION_MSG;
+import static fis.his.admin.case_workers_management.constant.LogConstant.MAIL_SENT_FAILD_MSG;
+import static fis.his.admin.case_workers_management.constant.LogConstant.MAIL_SENT_SUCCESS_MSG;
+import static fis.his.admin.case_workers_management.constant.LogConstant.SET_STATUS_INACTIVE_ERROR_MSG;
+import static fis.his.admin.case_workers_management.constant.LogConstant.SET_STATUS_INACTIVE_SUCCESS_MSG;
+import static fis.his.admin.case_workers_management.constant.LogConstant.STATUS_ACTIVE;
+import static fis.his.admin.case_workers_management.constant.LogConstant.STATUS_LOCKED;
+import static fis.his.admin.case_workers_management.constant.LogConstant.TEMPORARY_PASSWORD_LENGTH;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import fis.his.admin.case_workers_management.customexception.ExceptionInAccountActive;

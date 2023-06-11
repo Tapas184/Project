@@ -1,6 +1,8 @@
 package fis.his.admin.case_workers_management.controller.role;
 
-import java.util.List;
+import static fis.his.admin.case_workers_management.constant.LogConstant.METHOD_EXECUTION_ENDED;
+import static fis.his.admin.case_workers_management.constant.LogConstant.METHOD_EXECUTION_STARTED;
+
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import static fis.his.admin.case_workers_management.constant.LogConstant.*;
 
 import fis.his.admin.case_workers_management.entity.EntityForRole;
 import fis.his.admin.case_workers_management.model.RolePojo;

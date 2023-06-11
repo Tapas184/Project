@@ -8,6 +8,8 @@ import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import fis.his.admin.planmngmt.entity.PlanEntity;
@@ -86,5 +88,9 @@ public class PlanServiceImpl implements PlanServiceInterface {
 			model.setEndDate(String.valueOf(planEntity.getEndDate()));
 		}
 		return model;
+	}
+	@Override
+	public Page<PlanEntity> findAllPlan(Pageable pageable) {
+		return planrepo.findAll(pageable);
 	}
 }

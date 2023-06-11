@@ -2,6 +2,10 @@ package fis.his.admin.case_workers_management.service.role;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import fis.his.admin.case_workers_management.entity.EntityForRole;
 import fis.his.admin.case_workers_management.model.RolePojo;
 
 public interface RolesServiceInterface {
@@ -17,4 +21,6 @@ public interface RolesServiceInterface {
 	public void inactiveRole(Integer id);
 	
 	public RolePojo getRoleById(Integer id);
+	
+	public Page<EntityForRole> findAllRole(Pageable pageable);
 }

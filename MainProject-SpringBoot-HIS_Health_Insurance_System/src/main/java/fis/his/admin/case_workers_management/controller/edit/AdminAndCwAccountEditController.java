@@ -2,12 +2,18 @@ package fis.his.admin.case_workers_management.controller.edit;
 
 import static fis.his.admin.case_workers_management.constant.LogConstant.*;
 
+import java.net.http.HttpRequest;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fis.his.admin.case_workers_management.customexception.ExceptionInAccountActive;
 import fis.his.admin.case_workers_management.customexception.ExceptionInSetAccountInactive;
+import fis.his.admin.case_workers_management.entity.EntityForAdmin;
 import fis.his.admin.case_workers_management.model.CwAndAdPojo;
 import fis.his.admin.case_workers_management.service.adminandcw.AdminAndCwServiceInterface;
 import fis.his.admin.case_workers_management.service.role.RolesServiceInterface;
@@ -35,15 +42,20 @@ public class AdminAndCwAccountEditController {
 	private RolesServiceInterface roleService;
 
 	/**
-	 * 
+	 * Showing All user details by pageable
 	 * @param map
+	 * @param req
 	 * @return
 	 */
 	@GetMapping("/getalldetails")
-	public String getAllUser(Map<String, Object> map) {
+	public String getAllUser(Map<String, Object> map,
+			                 HttpServletRequest req,
+			                 @PageableDefault(direction = Direction.ASC,page = 0,size = 3,sort = "fname") Pageable pageable) {
 		log.info(METHOD_EXECUTION_STARTED + "-getAllUser");
-		List<CwAndAdPojo> userList = service.getAllData();
-		map.put("userlist", userList);
+		//List<CwAndAdPojo> userList = service.getAllData();
+		Page<EntityForAdmin> page = service.findAllDetails(pageable);
+		System.out.println(page.getTotalPages());
+		map.put("page", page);
 		return "case_workers_management/editjsp/getalldata";
 	}
 

@@ -4,12 +4,18 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import static fis.his.admin.case_workers_management.constant.LogConstant.*;
+
+import fis.his.admin.case_workers_management.entity.EntityForRole;
 import fis.his.admin.case_workers_management.model.RolePojo;
 import fis.his.admin.case_workers_management.service.role.RolesServiceInterface;
 import lombok.extern.slf4j.Slf4j;
@@ -29,10 +35,12 @@ public class ViewRolesController {
 	 * @return : List<RolePojo>
 	 */
 	@GetMapping("/showRoles")
-	public String getAllRoles(Map<String, Object> map) {
+	public String getAllRoles(Map<String, Object> map,
+			                  @PageableDefault(direction = Direction.ASC,page = 0,size = 3,sort = "role") Pageable pageable) {
 		log.info(METHOD_EXECUTION_STARTED + "-getAllRoles");
-		List<RolePojo> roleList = roleService.getAllRoles();
-		map.put("roleList", roleList);
+		//List<RolePojo> roleList = roleService.getAllRoles();
+		Page<EntityForRole> page = roleService.findAllRole(pageable);
+		map.put("page", page);
 		log.info(METHOD_EXECUTION_ENDED);
 		return "case_workers_management/role/viewroles";
 	}

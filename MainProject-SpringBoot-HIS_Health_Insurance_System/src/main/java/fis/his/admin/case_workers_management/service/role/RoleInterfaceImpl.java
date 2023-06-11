@@ -6,6 +6,8 @@ import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import fis.his.admin.case_workers_management.entity.EntityForRole;
@@ -82,5 +84,10 @@ public class RoleInterfaceImpl implements RolesServiceInterface {
 	@Override
 	public void inactiveRole(Integer id) {
 		rolerepo.deleteById(id);
+	}
+	
+	@Override
+	public Page<EntityForRole> findAllRole(Pageable pageable) {
+		return rolerepo.findAll(pageable);
 	}
 }

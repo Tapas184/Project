@@ -9,7 +9,7 @@
 </head>
 <body>
 	<c:choose>
-		<c:when test="${!empty modellist }">
+		<c:when test="${!empty page }">
 			<table style="border: solid; margin: auto;" border="1">
 				<caption>View Plan</caption>
 				<tr
@@ -21,7 +21,7 @@
 					<th>End date</th>
 					<th>Action</th>
 				</tr>
-					<c:forEach items="${modellist}" var="t" varStatus="index">
+					<c:forEach items="${page.getContent()}" var="t" varStatus="index">
 						<tr>
 						    <td>${index.count}</td>
 							<td>${t.planName}</td>
@@ -52,6 +52,22 @@
 		</c:otherwise>
 	</c:choose>
 	<hr>
+	<p style="text-align: center;">
+		<c:if test="${!page.isFirst()}">
+			<a href="view?page=page-1"><button>Prev</button></a>&nbsp;
+	</c:if>
+		<c:forEach var="i" begin="1" end="${page.getTotalPages()}" step="1">
+			<a href="view?page=${i-1}"><button style="size: 1mm;">${i}</button></a>&nbsp;&nbsp;
+    </c:forEach>
+		<c:choose>
+			<c:when test="${!page.isLast()}">
+				<a href="view?page=${page.getTotalPages()-1}"><button>Last</button></a>
+			</c:when>
+			<c:otherwise>
+				<a href="view?page=0"><button>First</button></a>
+			</c:otherwise>
+		</c:choose>
+	</p>
 	<div style="text-align: center;">
 	<a href="/registration/home"><button>Home</button></a>
 	</div>

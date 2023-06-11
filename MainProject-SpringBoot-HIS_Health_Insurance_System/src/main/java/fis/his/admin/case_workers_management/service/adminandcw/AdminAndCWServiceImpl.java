@@ -5,10 +5,16 @@ import static fis.his.admin.case_workers_management.constant.LogConstant.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import fis.his.admin.case_workers_management.customexception.ExceptionInAccountActive;
@@ -193,5 +199,10 @@ public class AdminAndCWServiceImpl implements AdminAndCwServiceInterface {
 		} catch (Exception e) {
 			throw new IllegalAccessException(MAIL_SENT_FAILD_MSG);
 		   }
+	}
+	
+	@Override
+	public Page<EntityForAdmin> findAllDetails(Pageable page) {
+		return adminRepo.findAll(page);
 	}
 }

@@ -24,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
-@RequestMapping(value =  {"/registration","/"})
+@RequestMapping(value =  {"/registration"})
 public class RegestrationController {
 	
 	@Autowired
@@ -33,13 +33,19 @@ public class RegestrationController {
 	@Autowired
 	private AdminAndCwServiceInterface adminandcwservice;
 	
-	@GetMapping(value = {"/home","/"})
+	@GetMapping(value = {"/home","/adminhome"})
 	public String showRegistrationHome() {
 		log.info(METHOD_EXECUTION_STARTED+" showRegistrationHome");
 		log.info(METHOD_EXECUTION_ENDED);
 		return "case_workers_management/jsp/home";
 	}
-
+	
+	@GetMapping(value = {"/cwhome"})
+	public String showCwRegistrationHome() {
+		log.info(METHOD_EXECUTION_STARTED+" showRegistrationHome");
+		log.info(METHOD_EXECUTION_ENDED);
+		return "case_workers_management/jsp/cwhome";
+	}
 	@GetMapping("/newregistration")
 	public String registrationForm(@ModelAttribute("emp") CwAndAdPojo pojo,
 			                       Map<String, Object> map) {

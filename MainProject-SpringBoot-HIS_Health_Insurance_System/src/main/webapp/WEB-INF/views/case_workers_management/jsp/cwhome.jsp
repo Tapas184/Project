@@ -1,14 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="text/html">
 <head>
 <meta charset="ISO-8859-1">
-<title>Error page</title>
+<title>Case Worker Home</title>
 </head>
 <body>
-	<h3 style="color: red">${errorMsg}</h3>
-	<br>
-	<a href="loginhome"><button>Login</button></a>
+<h2>Case worker Home Page</h2>
 </body>
 </html>

@@ -17,5 +17,11 @@
 	<h4 style="text-align: center;">
 	   <a href="/ar/ssncheck"><button>Application Registration</button></a>
 	</h4>
+	<h4 style="text-align: center;">
+	   <a href="/arview/showApplications"><button>View Application</button></a>
+	</h4>
+	<h4 style="text-align: center;">
+	   <a href="/arview/searchApp"><button>Search Application</button></a>
+	</h4>
 </body>
 </html>

@@ -2,15 +2,12 @@ package fis.his.application_registration.controller.create;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -92,14 +89,7 @@ public class CreateApplicationController {
 			                           RedirectAttributes redirect) {
 		String result = service.createApplication(model);
 		redirect.addFlashAttribute("result", result);
-		return "redirect:showApplications";
-	}
-	
-	@GetMapping("/showApplications")
-	public String viewApplications(Map<String, Object> map) {
-		List<ARModel> listOfModel = service.allApplication();
-		map.put("listOfApplications", listOfModel);
-		return"ARModule/view/viewapplications";
+		return "redirect:/arview/showApplications";
 	}
 	
 }

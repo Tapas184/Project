@@ -1,6 +1,7 @@
 package fis.his.application_registration.entity;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
@@ -50,11 +54,16 @@ public class AREntity {
 	@Column(name = "AR_STATE_NAME")
 	private String stateName;
 	
-	@Column(name = "AR_CREATE_DATE")
-	@DateTimeFormat(pattern = "dd-MM-YYYY")
-	private LocalDate createdDate;
+	@Column(name = "AR_VERIFY_STATUS")
+	private String vrifyStatus;
 	
-	@Column(name = "AP_LASTUPDATE_DATE")
-	@DateTimeFormat(pattern = "dd-MM-YYYY")
-	private LocalDate lastUpdate;
+	@CreationTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "INSERT_DATE", updatable = false)
+	private Date createdDate;
+	
+	@CreationTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "LAST_UPDATE_DATE", insertable = false)
+	private Date lastUpdate;
 }

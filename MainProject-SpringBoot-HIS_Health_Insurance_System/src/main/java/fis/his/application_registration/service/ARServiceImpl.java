@@ -27,6 +27,7 @@ public class ARServiceImpl implements ARServiceInterface {
 			entity.setDob(LocalDate.of(Integer.parseInt(split[2]), 
 					                    Integer.parseInt(split[1]),
 					                    Integer.parseInt(split[0])));
+			entity.setVrifyStatus("N");
 			AREntity user = arrepo.save(entity);
 			return "Application registration successfully with id: "+user.getId();
 		}
@@ -51,5 +52,16 @@ public class ARServiceImpl implements ARServiceInterface {
 		        	  return model;
 		          }).toList();
 		
+	}
+	
+	@Override
+	public ARModel fetchApplication(Integer id) {
+		Optional<AREntity> opt = arrepo.findById(id);
+		ARModel model = new ARModel();
+		if(opt.isPresent()) {
+			AREntity entity = opt.get();
+			BeanUtils.copyProperties(entity, model);
+		}
+		return model;
 	}
 }

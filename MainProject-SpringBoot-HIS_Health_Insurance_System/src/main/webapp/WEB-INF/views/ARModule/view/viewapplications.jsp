@@ -40,5 +40,6 @@
       <h2 style="color: red;">Empty List</h2>
    </c:otherwise>
 </c:choose>
+<div><a href="/registration/cwhome"><button>Home</button></a> </div>
 </body>
 </html>

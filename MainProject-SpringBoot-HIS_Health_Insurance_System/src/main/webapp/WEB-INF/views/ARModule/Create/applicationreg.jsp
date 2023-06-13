@@ -25,6 +25,10 @@
 				<td><c:input path="dob" readonly="true" /></td>
 			</tr>
 			<tr>
+				<td>State:</td>
+				<td><c:input path="stateName" readonly="true" /></td>
+			</tr>
+			<tr>
 				<td>Gender</td>
 				<td><c:radiobutton path="gender" value="M" />Male&nbsp;&nbsp; 
 				    <c:radiobutton path="gender" value="F" />Female

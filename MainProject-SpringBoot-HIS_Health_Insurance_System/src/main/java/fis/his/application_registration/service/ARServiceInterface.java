@@ -9,5 +9,6 @@ public interface ARServiceInterface {
 	public String createApplication(ARModel model);
 	
 	public List<ARModel> allApplication();
-
+	
+	public ARModel fetchApplication(Integer id);
 }

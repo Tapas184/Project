@@ -34,5 +34,8 @@
 	<h3 style="text-align: center;">
 		<a href="/planview/view"><button>View Plan</button></a>
 	</h3>
+	<h4 style="text-align: center;">
+		<a href="/ar/ssncheck"><button>Application Registration</button></a>
+	</h4>
 </body>
 </html>

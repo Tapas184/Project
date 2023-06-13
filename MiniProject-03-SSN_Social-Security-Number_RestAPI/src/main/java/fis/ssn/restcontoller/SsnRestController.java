@@ -16,7 +16,7 @@ import fis.ssn.model.SsnPojo;
 import fis.ssn.service.InterfaceSsnService;
 
 @RestController
-@RequestMapping("ssn")
+@RequestMapping("/ssn")
 public class SsnRestController {
 	@Autowired
 	private InterfaceSsnService service;

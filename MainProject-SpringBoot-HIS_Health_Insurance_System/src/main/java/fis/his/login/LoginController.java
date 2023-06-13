@@ -1,8 +1,12 @@
 package fis.his.login;
 
-import static fis.his.admin.case_workers_management.constant.LogConstant.*;
-
-import java.util.Map;
+import static fis.his.admin.case_workers_management.constant.LogConstant.METHOD_EXECUTION_ENDED;
+import static fis.his.admin.case_workers_management.constant.LogConstant.METHOD_EXECUTION_STARTED;
+import static fis.his.admin.case_workers_management.constant.LogConstant.MTHOD_DEBUG_STARTED;
+import static fis.his.admin.case_workers_management.constant.LogConstant.SES_MAILID;
+import static fis.his.admin.case_workers_management.constant.LogConstant.TEMPORARY_PASSWORD_LENGTH;
+import static fis.his.admin.case_workers_management.constant.LogConstant.USER_NOT_FOUND;
+import static fis.his.login.constant.LoginConstacnt.LOGIN_ERROR_MSG;
 
 import javax.servlet.http.HttpSession;
 
@@ -26,7 +30,6 @@ import fis.his.admin.case_workers_management.utils.mail.MailInterface;
 import fis.his.admin.case_workers_management.utils.password.IPasswordUtils;
 import fis.his.admin.case_workers_management.utils.sms.SMSServiceInterface;
 import fis.his.admin.case_workers_management.utils.temppass.RandomPassGenerator;
-import static fis.his.login.constant.LoginConstacnt.*;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -49,11 +52,24 @@ public class LoginController {
 	@Autowired
 	private MailInterface mail;
 
+	/**
+	 * This method for showing login home page
+	 * @param pojo : Model class used
+	 * @return :String[LVN]
+	 */
 	@GetMapping(value = { "/loginhome", "/" })
 	public String loginHome(@ModelAttribute("logindata") CwAndAdPojo pojo) {
 		log.info(METHOD_EXECUTION_STARTED + " loginHome");
 		return "case_workers_management/login/homepage";
 	}
+	/**
+	 * {@summary : This method used for filter all the level of a user then it allow to login}
+	 * @param pojo : model class is used
+	 * @param ses :Sees interface is used
+	 * @param redirect :As per role this method is redirect to accordingly
+	 * @return : String[LVN]
+	 * @throws Exception
+	 */
 
 	@PostMapping("/postlogin")
 	public String postLoginForm(@ModelAttribute("logindata") CwAndAdPojo pojo,
@@ -102,14 +118,27 @@ public class LoginController {
 			errorMsg = "Invalid mailid";
 			redirect.addFlashAttribute(LOGIN_ERROR_MSG, errorMsg);
 		} // 1st else
+		log.info(METHOD_EXECUTION_ENDED);
 		return "redirect:loginhome";
 	}
 
+	/**
+	 * {@summary: This method is used to user can reset his password by clicking forgot password }
+	 * @param pojo
+	 * @return
+	 */
 	@GetMapping("/forgotpass")
 	public String forgotPass(@ModelAttribute("frgt") CwAndAdPojo pojo) {
 		return "case_workers_management/login/passwordrestpage";
 	}
 
+	/**
+	 * {@summary: This method used for after user click forgot password this method will verify the otp of mail and mobile}
+	 * @param pojo : Model class
+	 * @param ses :Interface
+	 * @return :String lVN
+	 * @throws Exception : User not found exception.
+	 */
 	@PostMapping("/postpasswordreset")
 	public String restPasswored(@ModelAttribute("frgt") CwAndAdPojo pojo, HttpSession ses) throws Exception {
 		log.info(METHOD_EXECUTION_STARTED + "-restPasswored");
@@ -137,16 +166,28 @@ public class LoginController {
 		}
 		throw new ExceptionInFounduser(USER_NOT_FOUND);
 	}
-
+	
+	/**
+	 * {@summary: This method is used to display the page where user can insert mail and phone otp}
+	 * @param pojo: Model object
+	 * @return : LVN
+	 */
 	@GetMapping("/passwordResetUrl")
-	public String passwordrestForm(@ModelAttribute("mdl") UnlockAccountPojo pojo, RedirectAttributes redirect) {
+	public String passwordrestForm(@ModelAttribute("mdl") UnlockAccountPojo pojo) {
 
 		return "case_workers_management/login/resetpasswordpage";
 	}
 
+	/**
+	 * {@summary: This method used for after user submitting otp it will check otp is valid or not}
+	 * @param pojo :Model object
+	 * @param ses :Interface
+	 * @param redirect : /passwordResetUrl
+	 * @return String[LVN]
+	 */
 	@PostMapping("/postOTPEntered")
 	public String postEnterOtp(@ModelAttribute("mdl") UnlockAccountPojo pojo, HttpSession ses,
-			RedirectAttributes redirect, Map<String, Object> map) {
+			RedirectAttributes redirect) {
 		log.info(METHOD_EXECUTION_STARTED + "-postEnterOtp");
 		String otp = (String) ses.getAttribute("otp");
 		ses.removeAttribute("otp");
@@ -161,6 +202,12 @@ public class LoginController {
 		return "redirect:passwordResetUrl";
 	}
 
+	/**
+	 * {@summary: This method is used for set the password}
+	 * @param pojo : Model object
+	 * @param ses : Interface
+	 * @return : String LVN
+	 */
 	@GetMapping("/setpassword")
 	public String newPasswordSet(@ModelAttribute("model") UnlockAccountPojo pojo, HttpSession ses) {
 		log.info(METHOD_EXECUTION_STARTED + "-newPasswordSet");
@@ -170,6 +217,13 @@ public class LoginController {
 		return "case_workers_management/login/addNewPassword";
 	}
 
+	/**
+	 * {@summary: This method is used after user submit new password}
+	 * @param pojo : Model object
+	 * @param ses :interface
+	 * @return : String LVN
+	 * @throws Exception
+	 */
 	@PostMapping("/postAddNewPassword")
 	public String postSetNewPassword(@ModelAttribute("model") UnlockAccountPojo pojo, HttpSession ses)
 			throws Exception {
@@ -181,7 +235,12 @@ public class LoginController {
 		log.info(METHOD_EXECUTION_ENDED);
 		return "redirect:susurl";
 	}
-
+/**
+ * {@summary: This method is used for after successfully changed password}
+ * @param model: Model object
+ * @param ses :Interface
+ * @return :LVN
+ */
 	@GetMapping("/susurl")
 	public String redirectUrl(Model model, HttpSession ses) {
 		log.info(METHOD_EXECUTION_STARTED + "-redirectUrl");

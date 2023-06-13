@@ -7,6 +7,15 @@
 <title>Case Worker Home</title>
 </head>
 <body>
-<h2>Case worker Home Page</h2>
+	<h2 style="text-align: center; color: blue;">Welcome to Case
+		Workers portal</h2>
+	<br>
+	<div style="color: green;">${loginSuccMsg}</div>
+	<div style="text-align: right; color: green;">Login Name
+		:${userName}</div>
+	<br>
+	<h4 style="text-align: center;">
+	   <a href="/ar/ssncheck"><button>Application Registration</button></a>
+	</h4>
 </body>
 </html>

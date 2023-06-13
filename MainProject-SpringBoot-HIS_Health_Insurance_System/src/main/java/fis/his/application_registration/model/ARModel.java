@@ -29,4 +29,8 @@ public class ARModel implements Serializable {
 	private String mail;
 	
 	private String stateName;
+	
+	private String createdDate;
+	
+	private String lastUpdate;
 }

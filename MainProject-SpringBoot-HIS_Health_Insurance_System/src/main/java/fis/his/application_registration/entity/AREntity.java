@@ -49,5 +49,12 @@ public class AREntity {
 	
 	@Column(name = "AR_STATE_NAME")
 	private String stateName;
-
+	
+	@Column(name = "AR_CREATE_DATE")
+	@DateTimeFormat(pattern = "dd-MM-YYYY")
+	private LocalDate createdDate;
+	
+	@Column(name = "AP_LASTUPDATE_DATE")
+	@DateTimeFormat(pattern = "dd-MM-YYYY")
+	private LocalDate lastUpdate;
 }

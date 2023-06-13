@@ -1,14 +1,9 @@
 package fis.his.application_registration.controller.create;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,7 +11,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
-import org.springframework.format.datetime.DateFormatter;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -28,7 +22,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import  fis.his.application_registration.constant.Constant;
@@ -47,10 +40,10 @@ public class CreateApplicationController {
 	private RestTemplate restTemplate;
 	@Autowired
 	private ObjectMapper objMapper;
-	@Autowired
-	private Environment env;
+
 	@Value("${ssn.statename}")
 	private String state;
+	
 	@GetMapping(value = {"/ssncheck"})
 	public String showSsnHome(@ModelAttribute("model") ARModel model) {
 		return "ARModule/Create/ssncheck";
@@ -92,6 +85,21 @@ public class CreateApplicationController {
 		    	redirect.addFlashAttribute("invalidCitizen", invalidCitizen);
 		    }
 		return Constant.REDIRECT_CHECK;
+	}
+	
+	@PostMapping("/postappform")
+	public String submitApplicationForm(@ModelAttribute("model") ARModel model,
+			                           RedirectAttributes redirect) {
+		String result = service.createApplication(model);
+		redirect.addFlashAttribute("result", result);
+		return "redirect:showApplications";
+	}
+	
+	@GetMapping("/showApplications")
+	public String viewApplications(Map<String, Object> map) {
+		List<ARModel> listOfModel = service.allApplication();
+		map.put("listOfApplications", listOfModel);
+		return"ARModule/view/viewapplications";
 	}
 	
 }

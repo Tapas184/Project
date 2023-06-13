@@ -1,6 +1,8 @@
 package fis.his.application_registration.service;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,26 @@ public class ARServiceImpl implements ARServiceInterface {
 			AREntity user = arrepo.save(entity);
 			return "Application registration successfully with id: "+user.getId();
 		}
-		return null;
+		else {
+			Optional<AREntity> opt = arrepo.findById(model.getId());
+			if(opt.isPresent()) {
+				AREntity entity = opt.get();
+				BeanUtils.copyProperties(model, entity);
+			}
+		}
+		return "Application Number"+model.getId()+" updated";
+	}
+	
+	@Override
+	public List<ARModel> allApplication() {
+		List<AREntity> listEntity = arrepo.findAll();
+	return	listEntity.stream()
+		          .map(entity->{
+		        	  ARModel model = new ARModel();
+		        	  BeanUtils.copyProperties(entity, model);
+		        	  model.setDob(entity.getDob().toString());
+		        	  return model;
+		          }).toList();
+		
 	}
 }

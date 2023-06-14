@@ -31,10 +31,10 @@
              <td>${mdl.ssn}</td>
              <ins hidden="${mdl.vrifyStatus}"></ins>
              <c:if test="${mdl.vrifyStatus == 'N' }">
-             <td><a href="edit?id=${i.id}"><button>Verify</button></a></td> 
+             <td><a href="edit?id=${i.id}"><button style="background-color: orange;">Verify</button></a></td> 
              </c:if>
              <c:if test="${mdl.vrifyStatus == 'Y' }">
-             <td><button>Verified</button></td> 
+             <td><button style="background-color: green;">Verified</button></td> 
              </c:if>
          </tr>
        </table>  
@@ -43,5 +43,12 @@
      <h1>No application available</h1>
    </c:otherwise>
 </c:choose>
+
+<c:if test="${Userrole.equalsIgnoreCase('admin')}">
+   <a href="/registration/home"><button>Home</button></a>
+</c:if>
+<c:if test="${Userrole.equalsIgnoreCase('cw')}">
+   <a href="/registration/cwhome"><button>Home</button></a>
+</c:if>
 </body>
 </html>

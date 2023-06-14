@@ -73,7 +73,7 @@ public class LoginController {
 
 	@PostMapping("/postlogin")
 	public String postLoginForm(@ModelAttribute("logindata") CwAndAdPojo pojo,
-			                 HttpSession ses, 
+			                 HttpSession ses,
 			                 RedirectAttributes redirect
 			                    ) throws Exception {
 		log.info(METHOD_EXECUTION_STARTED + " postLogin");
@@ -89,6 +89,7 @@ public class LoginController {
 							redirect.addFlashAttribute("loginSuccMsg", loginSuccMsg);
 							String userName= user.getFname()+" "+user.getLname();
 							ses.setAttribute("userName", userName);
+							ses.setAttribute("userRole", user.getRole());
 							return "redirect:/registration/adminhome";
 							
 						}else if(user.getRole().equalsIgnoreCase("cw")) {
@@ -96,6 +97,7 @@ public class LoginController {
 							redirect.addFlashAttribute("loginSuccMsg", loginSuccMsg);
 							String userName= user.getFname()+" "+user.getLname();
 							ses.setAttribute("userName", userName);
+							ses.setAttribute("userRole", user.getRole());
 							return "redirect:/registration/cwhome";
 						}//else
 						

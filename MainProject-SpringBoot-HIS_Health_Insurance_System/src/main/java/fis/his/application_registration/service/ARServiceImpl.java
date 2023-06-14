@@ -61,6 +61,7 @@ public class ARServiceImpl implements ARServiceInterface {
 		if(opt.isPresent()) {
 			AREntity entity = opt.get();
 			BeanUtils.copyProperties(entity, model);
+			model.setDob(entity.getDob().toString());
 		}
 		return model;
 	}

@@ -40,6 +40,11 @@
       <h2 style="color: red;">Empty List</h2>
    </c:otherwise>
 </c:choose>
-<div><a href="/registration/cwhome"><button>Home</button></a> </div>
+<c:if test="${Userrole.equalsIgnoreCase('admin')}">
+   <a href="/registration/home"><button>Home</button></a>
+</c:if>
+<c:if test="${Userrole.equalsIgnoreCase('cw')}">
+   <a href="/registration/cwhome"><button>Home</button></a>
+</c:if>
 </body>
 </html>

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,14 +24,19 @@ public class ViewApplicationController {
 	private ARServiceInterface service;
 	
 	@GetMapping("/showApplications")
-	public String viewApplications(Map<String, Object> map) {
+	public String viewApplications(Map<String, Object> map,
+			HttpSession ses) {
+		String attribute = (String)ses.getAttribute("userRole");
+		map.put("Userrole", attribute);
 		List<ARModel> listOfModel = service.allApplication();
 		map.put("listOfApplications", listOfModel);
 		return"ARModule/view/viewapplications";
 	}
 	
 	@GetMapping("/searchApp")
-	public String searchApplication(@ModelAttribute("model") ARModel model) {
+	public String searchApplication(@ModelAttribute("model") ARModel model,
+			                       Map<String, Object> map) {
+		map.put("check", model);
 		return "ARModule/view/searchApplication";
 	}
 	@PostMapping("/fetchApplication")
@@ -45,9 +51,13 @@ public class ViewApplicationController {
 	
 	@GetMapping("/showapplicationdetails")
 	public String showDetails(HttpSession ses,
-			                  Map<String, Object> map) {
-		ARModel model = (ARModel)ses.getAttribute("user");
-		map.put("mdl", model);
-		return "ARModule/view/applicationdetails";
+			                  Map<String, Object> map,
+			                  @ModelAttribute("model") ARModel model) {
+		ARModel mod = (ARModel)ses.getAttribute("user");
+		map.put("check", mod);
+		String attribute = (String)ses.getAttribute("userRole");
+		map.put("Userrole", attribute);
+		BeanUtils.copyProperties(mod, model);
+		return "ARModule/view/searchApplication";
 	}
 }

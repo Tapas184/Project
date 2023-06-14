@@ -7,8 +7,7 @@
 <title>Home</title>
 </head>
 <body>
-	<h2 style="text-align: center; color: blue;">Welcome to Case
-		Workers And Admin Registration portal</h2>
+	<h2 style="text-align: center; color: blue;">Welcome Admin Registration portal</h2>
 	<br>
 	<div style="color: green;">${loginSuccMsg}</div>
 	<div style="text-align: right; color: green;">Login Name
@@ -36,6 +35,12 @@
 	</h3>
 	<h4 style="text-align: center;">
 		<a href="/ar/ssncheck"><button>Application Registration</button></a>
+	</h4>
+		<h4 style="text-align: center;">
+	   <a href="/arview/showApplications"><button>View Application</button></a>
+	</h4>
+	<h4 style="text-align: center;">
+	   <a href="/arview/searchApp"><button>Search Application</button></a>
 	</h4>
 </body>
 </html>

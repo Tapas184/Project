@@ -19,7 +19,6 @@
 		</table>
 	</c:form>
 	<s:if test="${! empty check.id}">
-		<c:form action="" method="POST" modelAttribute="model">
 			<table style="border: solid;">
 			 <caption>Applicant Details</caption>
 				<tr>
@@ -55,10 +54,9 @@
 					<td>${model.stateName}</td>
 				</tr>
 				<tr>
-					<td colspan="2"><input type="submit" value="Create Case"></td>
+					<td colspan="2"><a href="/Dcplan/dcplanhome?id=${model.id}">Create Case</a></td>
 				</tr>
 			</table>
-		</c:form>
 	</s:if>
 </body>
 </html>

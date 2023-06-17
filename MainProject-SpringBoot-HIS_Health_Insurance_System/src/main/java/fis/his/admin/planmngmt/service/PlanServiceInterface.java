@@ -19,5 +19,8 @@ public interface PlanServiceInterface {
 	public PlanModel getPlanDetails(Integer id);
 	
 	public Page<PlanEntity> findAllPlan(Pageable pageable);
+	
+	public PlanEntity getByname(String name);
+
 
 }

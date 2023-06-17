@@ -93,4 +93,10 @@ public class PlanServiceImpl implements PlanServiceInterface {
 	public Page<PlanEntity> findAllPlan(Pageable pageable) {
 		return planrepo.findAll(pageable);
 	}
+	
+	@Override
+	public PlanEntity getByname(String name) {
+		return  planrepo.findByPlanName(name.toUpperCase());
+		
+	}
 }

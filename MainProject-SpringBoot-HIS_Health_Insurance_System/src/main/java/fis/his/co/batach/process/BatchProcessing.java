@@ -10,6 +10,7 @@ import java.util.concurrent.Executors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import fis.his.co.batach.bao.BaoInterface;
 import fis.his.co.batach.model.BatchRunModel;
 import fis.his.co.batach.model.BatchSumryModel;
 import fis.his.co.batach.service.BatchServiceInterface;
@@ -26,12 +27,15 @@ public class BatchProcessing {
 	private BatchServiceInterface batchService;
 
 	@Autowired
+	private BaoInterface baoservice;
+	
+	@Autowired
 	private EligibilityInserface edService;
 	
 	private  Integer successTroggerCount=0;
 	private  Integer failureTriggerCount=0;
 
-	public void test() {
+	public void test() throws NumberFormatException, ClassNotFoundException {
 		Long preProcess = this.preProcess();
 		this.start();
 		this.postProcess(preProcess);
@@ -47,11 +51,12 @@ public class BatchProcessing {
 		return result.getBatchRunId();
 	}
 
-	public void start() {
+	public void start() throws NumberFormatException, ClassNotFoundException {
 		// reading the pending data from Trigger class
-		List<TriggerModel> triggerList = edService.fetchDataWhereStatusIsPendig();
+		//List<TriggerModel> triggerList = edService.fetchDataWhereStatusIsPendig();
+		List<TriggerModel> triggerList = baoservice.getTriggerByBucket("${batch.trigger_table.status}", Integer.parseInt("${batch.trigger_table.bucketsize}"), Integer.parseInt("${batch.trigger_table.bucketnumbe}"));
 		// create multiple thread to run the batch
-		ExecutorService service = Executors.newFixedThreadPool(20);
+		ExecutorService service = Executors.newFixedThreadPool(Integer.parseInt("${thread.pool.count}"));
 		//create thread pool
 		ExecutorCompletionService<Object> pool = new ExecutorCompletionService<>(service);
 		

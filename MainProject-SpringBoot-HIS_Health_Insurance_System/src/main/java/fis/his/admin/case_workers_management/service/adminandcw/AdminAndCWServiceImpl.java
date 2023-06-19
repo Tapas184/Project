@@ -94,9 +94,12 @@ public class AdminAndCWServiceImpl implements AdminAndCwServiceInterface {
 	@Override
 	public CwAndAdPojo getuser(String email) {
 		EntityForAdmin admin = adminRepo.findByEmailid(email);
+		if(admin!=null) {
 		CwAndAdPojo pojoAdmin = new CwAndAdPojo();
 		BeanUtils.copyProperties(admin, pojoAdmin);
 		return pojoAdmin;
+		}
+		return null;
 	}
 
 	@Override

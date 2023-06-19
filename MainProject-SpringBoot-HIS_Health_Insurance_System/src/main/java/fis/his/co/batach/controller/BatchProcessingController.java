@@ -15,7 +15,11 @@ public class BatchProcessingController {
 	private BatchProcessing batch;
 	
 	@GetMapping("/pdf")
-	public void getPdf() {
-		batch.test();
+	public void getPdf(){
+		try {
+			batch.test();
+		} catch (NumberFormatException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 }

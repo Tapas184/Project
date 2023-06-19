@@ -2,6 +2,10 @@ package fis.his.co.batach.process;
 
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorCompletionService;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -46,10 +50,21 @@ public class BatchProcessing {
 	public void start() {
 		// reading the pending data from Trigger class
 		List<TriggerModel> triggerList = edService.fetchDataWhereStatusIsPendig();
+		// create multiple thread to run the batch
+		ExecutorService service = Executors.newFixedThreadPool(20);
+		//create thread pool
+		ExecutorCompletionService<Object> pool = new ExecutorCompletionService<>(service);
+		
 		for(TriggerModel t : triggerList) {
-			process(t);
+			//submit task to thread
+			pool.submit(new Callable<Object>() {
+				@Override
+				public Object call() throws Exception {
+					process(t);
+					return null;
+				}
+			});
 		}
-
 	}
 
 	public void process(TriggerModel triggerModel) {

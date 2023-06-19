@@ -16,4 +16,6 @@ public interface EligibilityInserface {
 	public EligibilityModel fetchByCaseNumber(Long caseno);
 	
 	public Boolean updateTrigger(TriggerModel trigModel);
+	
+	public List<TriggerModel> findByBucket(int bucketSize, int bucketNumber);
 }

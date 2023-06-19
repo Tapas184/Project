@@ -81,4 +81,15 @@ public class EligibilityServiceImpl implements EligibilityInserface {
 		}
 		return false;
 	}
+	
+	@Override
+	public List<TriggerModel> findByBucket(int bucketSize, int bucketNumber) {
+		List<CoTriggerEntity> listEntity = trepo.findByBucket(bucketSize, bucketNumber-1);
+		return listEntity.stream()
+				         .map(entity->{
+				        	 TriggerModel model = new TriggerModel();
+				        	 BeanUtils.copyProperties(entity, model);
+				        	 return model;
+				         }).toList();
+	}
 }

@@ -1,0 +1,43 @@
+package static.com.rules;
+
+import com.drools.model.Personinfo;
+import com.drools.model.Planinfo;
+
+rule "for snap plan AP"
+  when
+    personinfoObject: Personinfo(isEmployed=="N")
+  then
+         Planinfo pinfo = new Planinfo();
+         pinfo.setPlanName("SNAP");
+         pinfo.setPlanStatus("AP");
+         personinfoObject.setPlaninfo(pinfo);
+    end     
+
+rule "for snap plan AP whose salary less than equals to 10K"
+  when
+    personinfoObject: Personinfo(isEmployed=="Y")
+  then
+    when
+        personinfoObject: Personinfo(salary<=10000)
+     then
+        Planinfo pinfo = new Planinfo();
+         pinfo.setPlanName("SNAP");
+         pinfo.setPlanStatus("AP");
+         personinfoObject.setPlaninfo(pinfo);
+      end      
+   end
+   
+rule "for snap DN"
+  when
+    personinfoObject: Personinfo(isEmployed=="Y")
+  then
+    when
+        personinfoObject: Personinfo(salary>10000)
+     then
+      Planinfo pinfo = new Planinfo();
+       pinfo.setPlanName("SNAP");
+       pinfo.setPlanStatus("DN");
+       pinfo.setDeniedReason("High Income");
+       personinfoObject.setPlaninfo(pinfo);
+     end
+  end   

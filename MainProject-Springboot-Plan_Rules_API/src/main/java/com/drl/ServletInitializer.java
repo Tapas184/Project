@@ -1,4 +1,4 @@
-package com.drools;
+package com.drl;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

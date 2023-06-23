@@ -1,9 +1,9 @@
-package com.drools.model;
+package com.drl.model;
 
 import lombok.Data;
 
 @Data
-public class Planinfo {
+public class PlanInfo {
 
 	private String planName;
 	

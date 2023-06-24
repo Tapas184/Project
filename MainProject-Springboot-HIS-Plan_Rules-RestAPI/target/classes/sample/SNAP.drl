@@ -31,6 +31,6 @@ rule "for snap DN"
       PlanInfo pinfo = new PlanInfo();
        pinfo.setPlanName("SNAP");
        pinfo.setPlanStatus("DN");
-       pinfo.setDeniedReason("High Income");
+       pinfo.setMsg("High Income");
        IndvinfoObject.setPlanInfo(pinfo);
    end

@@ -16,4 +16,14 @@ public class Indvinfo  {
 	private Integer salary;
 	
 	private PlanInfo planInfo;
+	
+	private String marriedStatus;
+	
+	private String childStatus;
+	
+	private Integer childCount;
+	
+	private Integer childAge;
+	
+	
 }

@@ -6,18 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.drools.constants.DroolsConstants;
+import com.drools.constants.LogMsg;
 import com.drools.models.Indvinfo;
 import com.drools.models.PlanInfo;
 import com.drools.service.DroolsService;
 import com.drools.utils.DroolsUtils;
 
 import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author navneetprabhakar
  */
 @Service
-@Log4j2
+@Slf4j
 public class DroolsServiceImpl implements DroolsService {
     @Autowired
     private DroolsUtils droolsUtils;
@@ -25,16 +27,17 @@ public class DroolsServiceImpl implements DroolsService {
     @Autowired
     private KieFileSystem kieFileSystem;
     /**
-     * This method calculates DroolsResponse based on the request and the rules written for that session
-     * @param request
-     * @return
+     * This method Will check eligibility from rules
+     * @param : Indvinfo
+     * @return : PlanInfo
      */
     @Override
     public PlanInfo checkEligibility(Indvinfo info) {
-        log.info("initiating calculate result");
+        log.info(LogMsg.METHOD_EXECUTION_STARTED+"-checkEligibility");
         String path = "/sample/"+info.getPlanName()+".drl";
         kieFileSystem.write(ResourceFactory.newClassPathResource(path));
          Indvinfo personInfo = droolsUtils.executeRuleEngine(info, DroolsConstants.SAMPLE.getSession());
+         log.info(LogMsg.METHOD_EXECUTION_ENDED);
          return personInfo.getPlanInfo();
     }
 

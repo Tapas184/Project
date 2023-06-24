@@ -9,6 +9,6 @@ public class PlanInfo {
 	
 	private String planStatus;
 	
-	private String deniedReason;
+	private String msg;
 	
 }

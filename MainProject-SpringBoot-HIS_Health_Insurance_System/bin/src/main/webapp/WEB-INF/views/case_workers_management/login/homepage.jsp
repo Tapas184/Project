@@ -32,9 +32,17 @@
 		</table>
 	</frm:form>
 	<hr>
-	<div style="text-align: center;">
+	<table style="margin: auto;">
+	<caption></caption>
+	 <tr>
+	<td style="text-align: left;">
+	    <a href="/registration/newregistration">Don't have account?</a>&nbsp;&nbsp;
+	 </td>
+	 <td style="text-align: right;">
 		<a href="forgotpass"><button>Forgot Password</button></a>
-	</div>
+	</td>
+	<tr>
+	</table>
 
 </body>
 </html>

@@ -12,7 +12,7 @@
 	<h1 style="color: gray; text-align: center;">All Admin and Case
 		Worker details</h1>
 	<t:choose>
-		<t:when test="${!empty userlist }">
+		<t:when test="${!empty page}">
 			<table 
 			style="margin-left: auto; margin-right: auto; background-color: pink;"
 				border="1">
@@ -26,7 +26,7 @@
 					<th>Status</th>
 					<th>Action</th>
 				</tr>
-			<t:forEach items="${userlist}" var="c" varStatus="Index">
+			<t:forEach items="${page.getContent()}" var="c" varStatus="Index">
 			   <tr>
 					<td>${Index.count}</td>
 					<td>${c.fname}&nbsp;${c.lname}</td>
@@ -66,8 +66,24 @@
 	<div style="color: green; text-align: center;">${deleteAccountMsg}</div>
 	<div style="color: green; text-align: center;">${activeAccountMsg}</div>
 	<hr>
+	<p style="text-align: center;">
+	<t:if test="${!page.isFirst()}">
+		<a href="getalldetails?page=page-1"><button>Prev</button></a>&nbsp;
+	</t:if>
+	<t:forEach var="i" begin="1" end="${page.getTotalPages()}" step="1">
+          <a href="getalldetails?page=${i-1}"><button style="size:1mm;">${i}</button></a>&nbsp;&nbsp;
+    </t:forEach>
+	<t:choose>
+		<t:when test="${!page.isLast()}">
+			<a href="getalldetails?page=${page.getTotalPages()-1}"><button>Last</button></a>
+		</t:when>
+		<t:otherwise>
+			<a href="getalldetails?page=0"><button>First</button></a>
+		</t:otherwise>
+	</t:choose>	
+</p>
 	<div style="text-align: center;">
-	   <a href="/registration/home"><button>Home</button></a>&nbsp; &nbsp;
+	   <a href="/registration/home"><button>Home</button></a>&nbsp;&nbsp;
 	   <a href="/registration/newregistration"><button>Create Account</button> </a>
 	</div>
 </body>

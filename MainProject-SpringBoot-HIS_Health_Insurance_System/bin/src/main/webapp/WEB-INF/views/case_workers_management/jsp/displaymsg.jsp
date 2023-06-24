@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<span style="color: green;">${resultmsg}</span>
+	<span style="color: green;margin: auto;">${resultmsg}</span>
 	<div style="text-align: center;">
 		<a href="newregistration"><button>New Registration</button></a>
 		&nbsp;&nbsp; <a href="home"><button>Home</button></a>

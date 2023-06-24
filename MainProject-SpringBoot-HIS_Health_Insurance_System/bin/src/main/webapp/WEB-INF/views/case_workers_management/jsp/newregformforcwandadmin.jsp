@@ -14,28 +14,28 @@
 		Form</h1>
 		<span style="text-align: center;">${resultmsg}</span>
 	<frm:form action="postreg" method="POST" modelAttribute="emp">
-		<table style="margin-left: auto; margin-right: auto;">
+		<table style="margin-left: auto; margin-right: auto;border: solid;">
 		    <caption>Registration Form</caption>
 		    <tr>
-		      <th colspan="2" style="color: yellow;text-align: center;">Registration</th>
+		      <th colspan="2" style="background-color:yellow ; text-align: center;">Registration</th>
 		    </tr>
 			<tr>
 				<td>First Name :</td>
-				<td><frm:input path="fname" placeholder="First Name" /></td>
+				<td><frm:input path="fname" placeholder="First Name" required="true"/></td>
 			</tr>
 			<tr>
 				<td>Last Name :</td>
-				<td><frm:input path="lname" placeholder="Last Name" /></td>
+				<td><frm:input path="lname" placeholder="Last Name" required="true"/></td>
 			</tr>
 			<tr>
 				<td>Email address :</td>
-				<td><frm:input path="emailid" placeholder="Email Address" />
+				<td><frm:input path="emailid" placeholder="Email Address"/>
 				<span id="dupmail" style="color: red"></span>
 				</td>
 			</tr>
 			<tr>
 				<td>Phone Number :</td>
-				<td><frm:input path="phnumber" placeholder="Phone Number" /></td>
+				<td><frm:input path="phnumber" placeholder="Phone Number" required="true"/></td>
 			</tr>
 			<tr>
 				<td>Gender :</td>
@@ -56,6 +56,10 @@
 			</tr>
 		</table>
 	</frm:form>
+	<br>
+	<div style="text-align: center;">
+	   <a href="/registration/home"><button>Home</button></a>
+	</div>
 	<script src="../js/app.js">
 </script>
 </body>

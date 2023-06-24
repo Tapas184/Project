@@ -12,8 +12,9 @@ $(document).ready(function() {
 			success: function(res) {
 				if (res == 'duplicate') {
 					$("#dupmail").html("Email is already registered");
-					$("#emailid").focus();
-				} //if
+					$("#dupmail").focus();
+				}
+				//if
 			},//function
 			error: function() {
 				$("#dupmail").html("Problem in data Fetch");

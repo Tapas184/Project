@@ -30,6 +30,7 @@ public class DroolsUtils {
         kieSession.dispose();
         return score;
     }
+    
 
     /**This method executes 3 param rule engine
      * @param score

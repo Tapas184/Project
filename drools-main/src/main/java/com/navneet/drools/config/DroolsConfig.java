@@ -18,7 +18,7 @@ public class DroolsConfig {
      * @return
      */
     @Bean
-    public KieContainer kieContainer() {
+     KieContainer kieContainer() {
         return KieServices.Factory.get().getKieClasspathContainer();
     }
 }

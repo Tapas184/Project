@@ -13,24 +13,52 @@ It also bridges the gap between the Business and Technical teams by providing a 
 
 # API Description: 
 - METHOD: POST
-- URL: http://localhost:8080/Drools/v1/rules/calculateResult
-- Body: This is a Sample Request with 2 Subjects and score
+- URL: http://localhost:8080/checkplan
+- Body: Indvinfo object required
+--json
+Indvinfo model{
+childAge	integer
+example: Integer
+This property ChildAge
 
-```json
-{
-    "marksheet": [
-        {
-            "subject": "MATHS",
-            "marks": 80,
-            "totalMarks": 100
-        },
-        {
-            "subject": "SCIENCE",
-            "marks": 80,
-            "totalMarks": 100
-        }
-    ]
+childCount	integer
+example: Integer
+This property ChildHeadCount
+
+childStatus	string
+example: String
+This property childStatus
+
+fname	string
+isEmployee	string
+example: String
+This is for user is employee or not
+
+lname	string
+marriedStatus	string
+example: String
+This property marriedStatus
+
+planInfo	PlanInfo{...}
+planName	string
+example: String
+This property planName
+
+salary	integer($int32)
+example: Integer
+This property Salary
+
 }
-```
 
+PlanInfo{
+description:	
+PlanInf model
+
+msg	string
+example: String
+planName	string
+example: String
+planStatus	string
+example: String
+}
 Wiki Link: https://www.drools.org/

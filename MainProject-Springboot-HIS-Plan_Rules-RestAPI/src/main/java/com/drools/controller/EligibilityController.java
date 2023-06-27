@@ -12,6 +12,9 @@ import com.drools.models.Indvinfo;
 import com.drools.models.PlanInfo;
 import com.drools.service.DroolsService;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -33,12 +36,21 @@ public class EligibilityController {
 	 * @param request
 	 * @return
 	 */
+		@ApiOperation(value = "Get PlanInfo by Indvinfo", tags = "Eligibility checker")
+		@ApiResponses(value = {
+				@ApiResponse(code = 200, message = "Successfully retrieved user"),
+				@ApiResponse(code = 404, message = "User not found")
+		})
+	
 	@PostMapping("/checkplan")
 	public ResponseEntity<PlanInfo> planCheckEligibility(@RequestBody Indvinfo info) {
 		log.info(LogMsg.METHOD_EXECUTION_STARTED + "-planCheckEligibility");
 		PlanInfo planInfo = droolsService.checkEligibility(info);
+		if(planInfo.getPlanStatus().equalsIgnoreCase("")) {
+			return new ResponseEntity<>(planInfo,HttpStatus.NOT_FOUND);
+		}
 		log.info(LogMsg.METHOD_EXECUTION_ENDED);
-		return new ResponseEntity<>(planInfo, HttpStatus.OK);
+		return ResponseEntity.ok(planInfo);
 	}
 
 }

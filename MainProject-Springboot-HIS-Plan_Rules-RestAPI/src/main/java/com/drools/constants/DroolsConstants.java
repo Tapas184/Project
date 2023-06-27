@@ -4,7 +4,7 @@ import lombok.Getter;
 
 /**
  * This enum contains the different session names to read the rules from different drools folders
- * @author navneetprabhakar
+ * @author Tapas rout
  *
  */
 @Getter

@@ -6,11 +6,22 @@ import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import fis.his.co.ed.entity.CoTriggerEntity;
 import fis.his.co.ed.entity.EligibilityEntity;
 import fis.his.co.ed.model.EligibilityModel;
+import fis.his.co.ed.model.Indvinfo;
+import fis.his.co.ed.model.PlanInfo;
 import fis.his.co.ed.model.TriggerModel;
 import fis.his.co.ed.repository.EligibilityRepo;
 import fis.his.co.ed.repository.TriggerRepository;
@@ -23,6 +34,12 @@ public class EligibilityServiceImpl implements EligibilityInserface {
 
 	@Autowired
 	private TriggerRepository trepo;
+	
+	@Autowired
+	private RestTemplate restTemplate;
+	
+	@Autowired
+	private ObjectMapper mapper;
 
 	@Override
 	public EligibilityModel get(Long id) {
@@ -91,5 +108,55 @@ public class EligibilityServiceImpl implements EligibilityInserface {
 				        	 BeanUtils.copyProperties(entity, model);
 				        	 return model;
 				         }).toList();
+	}
+	
+	@Override
+	public void saveEligibilityData(Indvinfo info) throws JsonProcessingException {	
+		
+		/*PlanInfo body = consume.planCheckEligibility(info).getBody();
+		EligibilityEntity entity = new EligibilityEntity();
+		entity.setBenifitAmount(500);
+		entity.setCaseNumber(info.getCaseNumber());
+		entity.setMsg(body.getMsg());
+		entity.setPlanStartDate(info.getPlanStrtDate());
+		entity.setPlanEndDate(info.getPlanEndDate());
+		entity.setPlanName(body.getPlanName());
+		entity.setPlanStatus(body.getPlanStatus());
+		EligibilityEntity eligible = erepo.save(entity);
+		String msg = "Successfullt inserted into EligibilityTable id is:"+eligible.getEdTraceId();
+		*/	
+		//convert Object to String
+		String jsonString = mapper.writeValueAsString(info);
+		
+		// Prepare Http header for post request
+		HttpHeaders header = new HttpHeaders();
+      header.setContentType(MediaType.APPLICATION_JSON);
+      
+      //prepare post url ready
+      String producerUrl = "http://localhost:8080/checkplan";
+      
+      // pre pare Response Entity
+      HttpEntity<String> httpEntity = new HttpEntity<>(jsonString,header);
+      ResponseEntity<String> resEntity = restTemplate.exchange(producerUrl, HttpMethod.POST, httpEntity, String.class);
+      
+      //get response body
+      String jbody = resEntity.getBody();
+      
+      //convert String body to Object form
+      PlanInfo body = mapper.readValue(jbody, PlanInfo.class);
+      
+      //create Eligibility Entity object
+      EligibilityEntity entity = new EligibilityEntity();
+        //set the data to entity
+		entity.setBenifitAmount(500);
+		entity.setCaseNumber(info.getCaseNumber());
+		entity.setMsg(body.getMsg());
+		entity.setPlanStartDate(info.getPlanStrtDate());
+		entity.setPlanEndDate(info.getPlanEndDate());
+		entity.setPlanName(body.getPlanName());
+		entity.setPlanStatus(body.getPlanStatus());
+		EligibilityEntity eligible = erepo.save(entity);
+		String msg = "Successfullt inserted into EligibilityTable id is:"+eligible.getEdTraceId();
+
 	}
 }

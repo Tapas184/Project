@@ -26,7 +26,8 @@ public class BaoImplement implements BaoInterface {
 		List<TriggerModel> modelList = new ArrayList<>();
 
 		try (Connection con = DriverManager.getConnection("${spring.datasource.url}", "${spring.datasource.username}",
-				"${spring.datasource.password}"); PreparedStatement pr = con.prepareStatement(sql)) {
+				"${spring.datasource.password}"); 
+	        PreparedStatement pr = con.prepareStatement(sql)) {
 			pr.setString(1, status);
 			pr.setInt(2, bucketSize);
 			pr.setInt(3, bucketNumber);

@@ -42,8 +42,8 @@ public class EligibilityEntity implements Serializable {
 	@Column(name = "INSERT_DATE", updatable = false)
 	private Date createdDate;
 	
-	@Column(name = "Denied_Coz")
-	private String deniedReason;
+	@Column(name = "Update_Msg")
+	private String msg;
 	
 	@Column(name = "Plan_Name")
 	private String planName;

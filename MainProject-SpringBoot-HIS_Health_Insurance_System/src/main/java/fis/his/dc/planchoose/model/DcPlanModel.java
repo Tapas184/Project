@@ -1,4 +1,4 @@
-package fis.his.dc.model;
+package fis.his.dc.planchoose.model;
 
 import lombok.Data;
 

@@ -1,7 +1,12 @@
-package fis.his.dc.controller.plancontroller;
+package fis.his.dc.planchoose.controller.plancontroller;
+
+import static fis.his.admin.case_workers_management.constant.LogConstant.METHOD_EXECUTION_ENDED;
+import static fis.his.admin.case_workers_management.constant.LogConstant.METHOD_EXECUTION_STARTED;
 
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import static fis.his.admin.case_workers_management.constant.LogConstant.*;
 import fis.his.admin.planmngmt.service.PlanServiceInterface;
 import fis.his.application_registration.model.ARModel;
 import fis.his.application_registration.service.ARServiceInterface;
-import fis.his.dc.model.DcPlanModel;
-import fis.his.dc.service.dcplanservice.DcplanServiceInterface;
+import fis.his.dc.planchoose.model.DcPlanModel;
+import fis.his.dc.planchoose.service.dcplanservice.DcplanServiceInterface;
+import fis.his.dc.snap.model.SnapModel;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -45,7 +50,8 @@ public class PlanController {
 	@GetMapping("/dcplanhome")
 	public String showPlanCreateForm(@ModelAttribute("model") DcPlanModel model,
 			                         @RequestParam("id") Integer id,
-			                         Map<String, Object> map) {
+			                         Map<String, Object> map,
+			                         HttpSession ses) {
 		log.info(METHOD_EXECUTION_STARTED+"-showPlanCreateForm");
 		ARModel armodel = arservice.fetchApplication(id);
 		List<String> list = planservice.getAllList()
@@ -54,6 +60,7 @@ public class PlanController {
 		           .toList();
 		BeanUtils.copyProperties(armodel, model);
 		map.put("rolelist", list);
+		ses.setAttribute("applId", id);
 		log.info(METHOD_EXECUTION_ENDED);
 	 return "DCModule/Dcplan/chooseplan";	
 	}
@@ -67,20 +74,38 @@ public class PlanController {
 	 */
 	@PostMapping("/postdcplanhome")
 	public String createPlan(@ModelAttribute("model") DcPlanModel model,
-			                 RedirectAttributes redirect) {
+			                 RedirectAttributes redirect,
+			                HttpSession ses) {
 		log.info(METHOD_EXECUTION_STARTED+"-createPlan");
-		String result = service.createPlan(model);
-		redirect.addFlashAttribute("result",result);
+		Integer attribute = (Integer)ses.getAttribute("applId");
+		
+		model.setId(attribute);
+		 Long id = service.createPlan(model);
+		String plan = model.getPlan();
+		ses.setAttribute("pname", plan);
+		ses.setAttribute("planid", id);
+		if(id!=null)
+		{
+			String result = "Successfully plan registered";
+			redirect.addFlashAttribute("result",result);
+		}
+		
 		log.info(METHOD_EXECUTION_ENDED);
-		return "redirect:childdcform";
+		return "redirect:form";
 	}
 	
 	/**
 	 * {@summary : Method is used for show child Data collection form}
 	 * @return : String logical view name
 	 */
-	@GetMapping("/childdcform")
-	public String showChildDcForm() {
-		return "DCModule/childdc/childdc";
+	@GetMapping("/form")
+	public String showChildDcForm(HttpSession ses, @ModelAttribute("snapM") SnapModel model) {
+		String plname=(String)ses.getAttribute("pname");
+		Integer attribute = (Integer)ses.getAttribute("applId");
+		Long id=(long)ses.getAttribute("planid");
+		model.setApplicationId(attribute);
+		model.setCaseId(id);
+		model.setPlanName(plname);
+		return "DCModule/"+plname+"/"+plname;
 	}
 }

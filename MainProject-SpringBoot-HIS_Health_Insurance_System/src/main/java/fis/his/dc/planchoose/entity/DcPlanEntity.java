@@ -1,4 +1,4 @@
-package fis.his.dc.entity;
+package fis.his.dc.planchoose.entity;
 
 import java.util.Date;
 

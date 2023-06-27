@@ -3,7 +3,6 @@ package com.drools.config;
 import org.kie.api.KieServices;
 import org.kie.api.builder.KieFileSystem;
 import org.kie.api.runtime.KieContainer;
-import org.kie.internal.runtime.manager.cdi.qualifier.Singleton;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

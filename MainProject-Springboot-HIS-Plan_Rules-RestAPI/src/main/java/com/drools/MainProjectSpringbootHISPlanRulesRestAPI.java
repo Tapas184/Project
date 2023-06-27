@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author Tapas Rout
  */
 @SpringBootApplication
+
 public class MainProjectSpringbootHISPlanRulesRestAPI {
 
 	public static void main(String[] args) {

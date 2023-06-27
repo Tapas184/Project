@@ -12,7 +12,6 @@ import com.drools.models.PlanInfo;
 import com.drools.service.DroolsService;
 import com.drools.utils.DroolsUtils;
 
-import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 
 /**

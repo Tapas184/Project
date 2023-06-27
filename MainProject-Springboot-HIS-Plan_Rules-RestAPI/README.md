@@ -49,7 +49,7 @@ example: Integer
 This property Salary
 
 }
-
+--This is a response object
 PlanInfo{
 description:	
 PlanInf model

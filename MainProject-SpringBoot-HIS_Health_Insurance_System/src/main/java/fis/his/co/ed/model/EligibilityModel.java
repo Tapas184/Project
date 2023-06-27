@@ -13,7 +13,7 @@ public class EligibilityModel {
 	
 	private Long caseNumber;
 	
-	private String deniedReason;
+	private String msg;
 	
 	private Date planStartDate;
 	

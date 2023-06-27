@@ -113,18 +113,6 @@ public class EligibilityServiceImpl implements EligibilityInserface {
 	@Override
 	public void saveEligibilityData(Indvinfo info) throws JsonProcessingException {	
 		
-		/*PlanInfo body = consume.planCheckEligibility(info).getBody();
-		EligibilityEntity entity = new EligibilityEntity();
-		entity.setBenifitAmount(500);
-		entity.setCaseNumber(info.getCaseNumber());
-		entity.setMsg(body.getMsg());
-		entity.setPlanStartDate(info.getPlanStrtDate());
-		entity.setPlanEndDate(info.getPlanEndDate());
-		entity.setPlanName(body.getPlanName());
-		entity.setPlanStatus(body.getPlanStatus());
-		EligibilityEntity eligible = erepo.save(entity);
-		String msg = "Successfullt inserted into EligibilityTable id is:"+eligible.getEdTraceId();
-		*/	
 		//convert Object to String
 		String jsonString = mapper.writeValueAsString(info);
 		
@@ -148,6 +136,7 @@ public class EligibilityServiceImpl implements EligibilityInserface {
       //create Eligibility Entity object
       EligibilityEntity entity = new EligibilityEntity();
         //set the data to entity
+      if(body.getPlanStatus().equalsIgnoreCase("AP")) {
 		entity.setBenifitAmount(500);
 		entity.setCaseNumber(info.getCaseNumber());
 		entity.setMsg(body.getMsg());
@@ -155,8 +144,22 @@ public class EligibilityServiceImpl implements EligibilityInserface {
 		entity.setPlanEndDate(info.getPlanEndDate());
 		entity.setPlanName(body.getPlanName());
 		entity.setPlanStatus(body.getPlanStatus());
-		EligibilityEntity eligible = erepo.save(entity);
-		String msg = "Successfullt inserted into EligibilityTable id is:"+eligible.getEdTraceId();
-
+		 erepo.save(entity);
+      }
+      else {
+    	entity.setCaseNumber(info.getCaseNumber());
+  		entity.setMsg(body.getMsg());
+  		entity.setPlanStartDate(info.getPlanStrtDate());
+  		entity.setPlanEndDate(info.getPlanEndDate());
+  		entity.setPlanName(body.getPlanName());
+  		entity.setPlanStatus(body.getPlanStatus());
+  		erepo.save(entity);
+      }
+      CoTriggerEntity triggerEntity = new CoTriggerEntity();
+      triggerEntity.setCasenumber(entity.getCaseNumber());
+      triggerEntity.setTrigStatue("P");
+      triggerEntity.setCreateDate(new Date());
+      trepo.save(triggerEntity);
+    
 	}
 }

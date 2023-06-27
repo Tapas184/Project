@@ -10,5 +10,4 @@ public class MainProjectSpringBootHisHealthInsuranceSystemApplication {
 		SpringApplication.run(MainProjectSpringBootHisHealthInsuranceSystemApplication.class, args);
 	}
 	
-
 }

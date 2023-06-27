@@ -45,7 +45,7 @@ public class SnapEntity implements Serializable{
 	@Column(name = "Case_Id")
 	private Long caseId;
 	
-	@Column(unique = true, name = "Applica_ID")
+	@Column(name = "Applica_ID")
 	private Integer applicationId;
 	
 	@Column(name = "Plan_Name")

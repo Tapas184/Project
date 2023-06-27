@@ -42,11 +42,15 @@ public class ViewApplicationController {
 	@PostMapping("/fetchApplication")
 	public String fetchApplication(@ModelAttribute("model") ARModel model,
 			                       HttpSession ses) {
+		if(model.getId()!=null) {
 		ARModel user = service.fetchApplication(model.getId());
 		if(user!=null) {
 			ses.setAttribute("user", user);
+			return "redirect:showapplicationdetails";
+		  }
 		}
-		return "redirect:showapplicationdetails";
+		return "redirect:searchApp";
+		
 	}
 	
 	@GetMapping("/showapplicationdetails")

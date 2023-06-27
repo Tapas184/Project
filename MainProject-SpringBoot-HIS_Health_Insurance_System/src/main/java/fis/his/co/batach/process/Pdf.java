@@ -97,7 +97,7 @@ public  class Pdf {
 		
 		//add 4th row
 		table.addCell(new Paragraph("Plan start date :"));
-		table.addCell(new Paragraph(model.getDeniedReason()));
+		table.addCell(new Paragraph(model.getMsg()));
 		
 		//add table to document
 		document.add(table);

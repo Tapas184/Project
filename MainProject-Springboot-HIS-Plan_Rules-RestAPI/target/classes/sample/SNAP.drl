@@ -21,6 +21,7 @@ rule "for snap plan AP for Employed with less salary"
          PlanInfo pinfo = new PlanInfo();
          pinfo.setPlanName("SNAP");
          pinfo.setPlanStatus("AP");
+         pinfo.setMsg("Congratulation..! Your SNAP plan is approved");
          IndvinfoObject.setPlanInfo(pinfo);
     end    
    

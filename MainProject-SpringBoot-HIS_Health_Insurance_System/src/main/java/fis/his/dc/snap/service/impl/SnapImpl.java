@@ -21,7 +21,7 @@ public class SnapImpl implements InterfaceSnap {
 	public String saveSnap(SnapModel snap) {
 		SnapEntity entity = new SnapEntity();
 		BeanUtils.copyProperties(snap, entity);
-		return "Snap data saved id"+snapRepo.save(entity).getSnapId();
+		return "Snap data saved id"+snapRepo.save(entity).getId();
 		
 	}
 

@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-  <f:form action="/snapPlan/snappost" method="POST" modelAttribute="snapM">
+  <f:form action="/snapPlan/snappost" method="POST" modelAttribute="model">
      <table>
      <tr>
         <th colspan="2">SNAP Form</th>

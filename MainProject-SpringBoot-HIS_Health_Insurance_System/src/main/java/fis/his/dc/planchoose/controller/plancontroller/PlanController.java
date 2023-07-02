@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import fis.his.admin.planmngmt.service.PlanServiceInterface;
 import fis.his.application_registration.model.ARModel;
 import fis.his.application_registration.service.ARServiceInterface;
+import fis.his.dc.planchoose.PlanModel;
 import fis.his.dc.planchoose.model.DcPlanModel;
 import fis.his.dc.planchoose.service.dcplanservice.DcplanServiceInterface;
 import fis.his.dc.snap.model.SnapModel;
@@ -99,13 +100,14 @@ public class PlanController {
 	 * @return : String logical view name
 	 */
 	@GetMapping("/form")
-	public String showChildDcForm(HttpSession ses, @ModelAttribute("snapM") SnapModel model) {
+	public String showChildDcForm(HttpSession ses, @ModelAttribute("model") PlanModel model) {
 		String plname=(String)ses.getAttribute("pname");
 		Integer attribute = (Integer)ses.getAttribute("applId");
-		Long id=(long)ses.getAttribute("planid");
+		Long id=(Long)ses.getAttribute("planid");
 		model.setApplicationId(attribute);
-		model.setCaseId(id);
+		model.setCaseId(Integer.parseInt(id.toString()));
 		model.setPlanName(plname);
 		return "DCModule/"+plname+"/"+plname;
 	}
+	
 }

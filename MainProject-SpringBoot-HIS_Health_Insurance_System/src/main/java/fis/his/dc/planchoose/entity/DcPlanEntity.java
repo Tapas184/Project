@@ -31,6 +31,7 @@ public class DcPlanEntity {
 	@Column(name = "USER_LNAME")
 	private String lname;
 	
+	@Column(name = "Plan_Name")
 	private String plan;
 	
 	@CreationTimestamp

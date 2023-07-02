@@ -29,7 +29,7 @@ public class SnapEntity implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long snapId;
+	private Long id;
 	
 	@Column(name = "IS_Employee")
 	private String isEmployee;

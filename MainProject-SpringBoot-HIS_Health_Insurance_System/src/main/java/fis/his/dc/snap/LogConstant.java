@@ -1,4 +1,4 @@
-package fis.his.dc;
+package fis.his.dc.snap;
 
 public class LogConstant {
 

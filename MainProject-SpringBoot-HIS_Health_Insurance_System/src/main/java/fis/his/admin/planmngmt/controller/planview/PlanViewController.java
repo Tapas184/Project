@@ -27,10 +27,12 @@ public class PlanViewController {
 	
 	@GetMapping("/view")
 	public String planView(Map<String, Object> map,
-			               @PageableDefault(direction = Direction.ASC,page = 0,size = 3,sort = "planName") Pageable pageable) {
+			               @PageableDefault(direction = Direction.ASC,page = 0,size = 3,sort = "planName") Pageable pageable
+			               ) {
+			Page<PlanEntity> page = planservice.findAllPlan(pageable);
+			map.put("page", page);
 		//List<PlanModel> allList = planservice.getAllList();
-		Page<PlanEntity> page = planservice.findAllPlan(pageable);
-		map.put("page", page);
+
 		return "Plan_management/viewplan/viewplan";
 	}
 	

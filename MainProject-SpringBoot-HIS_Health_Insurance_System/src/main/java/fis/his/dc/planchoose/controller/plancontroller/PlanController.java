@@ -24,7 +24,6 @@ import fis.his.application_registration.service.ARServiceInterface;
 import fis.his.dc.planchoose.PlanModel;
 import fis.his.dc.planchoose.model.DcPlanModel;
 import fis.his.dc.planchoose.service.dcplanservice.DcplanServiceInterface;
-import fis.his.dc.snap.model.SnapModel;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller

@@ -22,8 +22,9 @@
            <th>SSN</th>
            <th>Action</th>
          </tr>
-         <tr style="text-align: left;">
+         
          <c:forEach items="${listOfApplications}" var="i" varStatus="Index">
+          <tr style="text-align: left;">
              <td>${Index.count}</td>
              <td>${i.id}</td>
              <td>${i.fname}&nbsp;${i.lname}</td>
@@ -32,8 +33,9 @@
              <td>${i.phone}</td>
              <td>${i.ssn}</td>
              <td><a href="delete?id=${i.id}"><button>Delete</button></a></td> 
+          </tr>   
          </c:forEach>
-         </tr>
+         
       </table>
    </c:when>
    <c:otherwise>

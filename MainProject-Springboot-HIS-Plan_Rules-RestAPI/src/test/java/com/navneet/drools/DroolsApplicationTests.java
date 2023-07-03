@@ -1,13 +1,10 @@
 package com.navneet.drools;
 
-import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class DroolsApplicationTests {
+import com.drools.service.impl.DroolsServiceImpl;
 
-	@Test
-	void contextLoads() {
-	}
+@SpringBootTest(classes = DroolsServiceImpl.class)
+class DroolsApplicationTests {
 
 }

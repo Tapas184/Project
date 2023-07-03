@@ -5,7 +5,7 @@ import com.drools.models.PlanInfo;
 
 /**
  * Service Interface for Drools Related Service APIs
- * @author navneetprabhakar
+ * @author Tapas Rout
  *
  */
 public interface DroolsService {

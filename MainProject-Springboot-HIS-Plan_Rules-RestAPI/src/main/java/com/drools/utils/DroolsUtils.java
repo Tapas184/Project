@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * This Utility class contains util methods related to Drool and KIE
- * @author navneetprabhakar
+ * This Utility class contains utils methods related to Drool and KIE
+ * @author Tapas Rout
  *
  */
 @Component

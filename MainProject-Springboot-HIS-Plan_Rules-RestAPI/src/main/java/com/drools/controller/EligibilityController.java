@@ -36,18 +36,27 @@ public class EligibilityController {
 	 * @param request
 	 * @return
 	 */
-		@ApiOperation(value = "Get PlanInfo by Indvinfo", tags = "Eligibility checker")
-		@ApiResponses(value = {
-				@ApiResponse(code = 200, message = "Successfully retrieved user"),
-				@ApiResponse(code = 404, message = "User not found")
-		})
-	
+	@ApiOperation(value = "Get PlanInfo by Indvinfo", tags = "Eligibility checker")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully retrieved user"),
+			                @ApiResponse(code = 404, message = "User not found"),
+			                @ApiResponse(code = 500, message = "Internal server Error")
+	                      }
+	              )
+
 	@PostMapping("/checkplan")
-	public ResponseEntity<PlanInfo> planCheckEligibility(@RequestBody Indvinfo info) {
+	public ResponseEntity<Object> planCheckEligibility(@RequestBody Indvinfo info) {
 		log.info(LogMsg.METHOD_EXECUTION_STARTED + "-planCheckEligibility");
-		PlanInfo planInfo = droolsService.checkEligibility(info);
-		if(planInfo.getPlanStatus().equalsIgnoreCase("")) {
-			return new ResponseEntity<>(planInfo,HttpStatus.NOT_FOUND);
+		PlanInfo planInfo = null;
+		try {
+			log.debug(LogMsg.DEBUG_EXECUTION_STARTED);
+			planInfo = droolsService.checkEligibility(info);
+			if (planInfo.getPlanStatus().equalsIgnoreCase("")) {
+				return new ResponseEntity<>(planInfo, HttpStatus.NOT_FOUND);
+			}
+		log.debug(LogMsg.DEBUG_EXECUTION_ENDED);	
+		} catch (Exception e) {
+			log.error(LogMsg.ERROR_OCCOURED+" "+e.getMessage());
+			return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		log.info(LogMsg.METHOD_EXECUTION_ENDED);
 		return ResponseEntity.ok(planInfo);
